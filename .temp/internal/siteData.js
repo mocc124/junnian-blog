@@ -4,13 +4,13 @@
 export const siteData = {
   "title": "web Ninga",
   "description": "...",
-  "base": "/",
+  "base": "/junnian-blog/",
   "headTags": [
     [
       "link",
       {
         "rel": "icon",
-        "href": "/search.ico"
+        "href": "/junnian-blog/search.ico"
       }
     ]
   ],
@@ -85,66 +85,6 @@ export const siteData = {
           "level": 2,
           "title": "9. 工程化协作",
           "slug": "_9-工程化协作"
-        }
-      ]
-    },
-    {
-      "title": "设计模式",
-      "frontmatter": {},
-      "regularPath": "/basis/DesignPatterns.html",
-      "relativePath": "basis/DesignPatterns.md",
-      "key": "v-58f96035",
-      "path": "/basis/DesignPatterns.html",
-      "headers": [
-        {
-          "level": 2,
-          "title": "单例模式",
-          "slug": "单例模式"
-        },
-        {
-          "level": 3,
-          "title": "类实现",
-          "slug": "类实现"
-        },
-        {
-          "level": 3,
-          "title": "闭包实现",
-          "slug": "闭包实现"
-        },
-        {
-          "level": 3,
-          "title": "应用场景",
-          "slug": "应用场景"
-        },
-        {
-          "level": 2,
-          "title": "策略模式",
-          "slug": "策略模式"
-        },
-        {
-          "level": 2,
-          "title": "迭代器模式",
-          "slug": "迭代器模式"
-        },
-        {
-          "level": 2,
-          "title": "观察者模式",
-          "slug": "观察者模式"
-        },
-        {
-          "level": 2,
-          "title": "发布订阅模式",
-          "slug": "发布订阅模式"
-        },
-        {
-          "level": 2,
-          "title": "中介者模式",
-          "slug": "中介者模式"
-        },
-        {
-          "level": 2,
-          "title": "享元模式",
-          "slug": "享元模式"
         }
       ]
     },
@@ -245,6 +185,66 @@ export const siteData = {
           "level": 2,
           "title": "stylus",
           "slug": "stylus"
+        }
+      ]
+    },
+    {
+      "title": "设计模式",
+      "frontmatter": {},
+      "regularPath": "/basis/DesignPatterns.html",
+      "relativePath": "basis/DesignPatterns.md",
+      "key": "v-58f96035",
+      "path": "/basis/DesignPatterns.html",
+      "headers": [
+        {
+          "level": 2,
+          "title": "单例模式",
+          "slug": "单例模式"
+        },
+        {
+          "level": 3,
+          "title": "类实现",
+          "slug": "类实现"
+        },
+        {
+          "level": 3,
+          "title": "闭包实现",
+          "slug": "闭包实现"
+        },
+        {
+          "level": 3,
+          "title": "应用场景",
+          "slug": "应用场景"
+        },
+        {
+          "level": 2,
+          "title": "策略模式",
+          "slug": "策略模式"
+        },
+        {
+          "level": 2,
+          "title": "迭代器模式",
+          "slug": "迭代器模式"
+        },
+        {
+          "level": 2,
+          "title": "观察者模式",
+          "slug": "观察者模式"
+        },
+        {
+          "level": 2,
+          "title": "发布订阅模式",
+          "slug": "发布订阅模式"
+        },
+        {
+          "level": 2,
+          "title": "中介者模式",
+          "slug": "中介者模式"
+        },
+        {
+          "level": 2,
+          "title": "享元模式",
+          "slug": "享元模式"
         }
       ]
     },
@@ -354,6 +354,13 @@ export const siteData = {
       ]
     },
     {
+      "frontmatter": {},
+      "regularPath": "/basis/JavaScript.html",
+      "relativePath": "basis/JavaScript.md",
+      "key": "v-966d2ac6",
+      "path": "/basis/JavaScript.html"
+    },
+    {
       "title": "学习路线",
       "frontmatter": {
         "sidebar": "auto"
@@ -379,13 +386,6 @@ export const siteData = {
           "slug": "二、js-部分"
         }
       ]
-    },
-    {
-      "frontmatter": {},
-      "regularPath": "/basis/JavaScript.html",
-      "relativePath": "basis/JavaScript.md",
-      "key": "v-966d2ac6",
-      "path": "/basis/JavaScript.html"
     }
   ],
   "themeConfig": {

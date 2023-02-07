@@ -4,7 +4,7 @@ const nav = require("./config/nav.js");
 module.exports = {
   title: 'web Ninga',
   description: '...',
-  base: "",
+  base: "/junnian-blog/",
   head,
   configureWebpack: {
     node: {
