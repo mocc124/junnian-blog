@@ -9,54 +9,6 @@ import GlobalLayout from "C:\\Users\\Mrnianj\\Desktop\\Blog\\node_modules\\.stor
 injectComponentOption(GlobalLayout, 'mixins', rootMixins)
 export const routes = [
   {
-    name: "v-434e384c",
-    path: "/amway.html",
-    component: GlobalLayout,
-    beforeEnter: (to, from, next) => {
-      ensureAsyncComponentsLoaded("Layout", "v-434e384c").then(next)
-    },
-  },
-  {
-    name: "v-58f96035",
-    path: "/basis/DesignPatterns.html",
-    component: GlobalLayout,
-    beforeEnter: (to, from, next) => {
-      ensureAsyncComponentsLoaded("Layout", "v-58f96035").then(next)
-    },
-  },
-  {
-    name: "v-5be80026",
-    path: "/basis/CSS.html",
-    component: GlobalLayout,
-    beforeEnter: (to, from, next) => {
-      ensureAsyncComponentsLoaded("Layout", "v-5be80026").then(next)
-    },
-  },
-  {
-    name: "v-dc4affbe",
-    path: "/basis/HTML.html",
-    component: GlobalLayout,
-    beforeEnter: (to, from, next) => {
-      ensureAsyncComponentsLoaded("Layout", "v-dc4affbe").then(next)
-    },
-  },
-  {
-    name: "v-2a9646c7",
-    path: "/basis/ReviewJacaScript.html",
-    component: GlobalLayout,
-    beforeEnter: (to, from, next) => {
-      ensureAsyncComponentsLoaded("Layout", "v-2a9646c7").then(next)
-    },
-  },
-  {
-    name: "v-8f224ac8",
-    path: "/path.html",
-    component: GlobalLayout,
-    beforeEnter: (to, from, next) => {
-      ensureAsyncComponentsLoaded("Layout", "v-8f224ac8").then(next)
-    },
-  },
-  {
     name: "v-5da2a1fe",
     path: "/",
     component: GlobalLayout,
@@ -69,11 +21,59 @@ export const routes = [
     redirect: "/"
   },
   {
+    name: "v-434e384c",
+    path: "/amway.html",
+    component: GlobalLayout,
+    beforeEnter: (to, from, next) => {
+      ensureAsyncComponentsLoaded("Layout", "v-434e384c").then(next)
+    },
+  },
+  {
+    name: "v-dc4affbe",
+    path: "/basis/HTML.html",
+    component: GlobalLayout,
+    beforeEnter: (to, from, next) => {
+      ensureAsyncComponentsLoaded("Layout", "v-dc4affbe").then(next)
+    },
+  },
+  {
+    name: "v-5be80026",
+    path: "/basis/CSS.html",
+    component: GlobalLayout,
+    beforeEnter: (to, from, next) => {
+      ensureAsyncComponentsLoaded("Layout", "v-5be80026").then(next)
+    },
+  },
+  {
+    name: "v-58f96035",
+    path: "/basis/DesignPatterns.html",
+    component: GlobalLayout,
+    beforeEnter: (to, from, next) => {
+      ensureAsyncComponentsLoaded("Layout", "v-58f96035").then(next)
+    },
+  },
+  {
+    name: "v-2a9646c7",
+    path: "/basis/ReviewJacaScript.html",
+    component: GlobalLayout,
+    beforeEnter: (to, from, next) => {
+      ensureAsyncComponentsLoaded("Layout", "v-2a9646c7").then(next)
+    },
+  },
+  {
     name: "v-966d2ac6",
     path: "/basis/JavaScript.html",
     component: GlobalLayout,
     beforeEnter: (to, from, next) => {
       ensureAsyncComponentsLoaded("Layout", "v-966d2ac6").then(next)
+    },
+  },
+  {
+    name: "v-8f224ac8",
+    path: "/path.html",
+    component: GlobalLayout,
+    beforeEnter: (to, from, next) => {
+      ensureAsyncComponentsLoaded("Layout", "v-8f224ac8").then(next)
     },
   },
   {

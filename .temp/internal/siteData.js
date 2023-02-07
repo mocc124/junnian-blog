@@ -12,9 +12,30 @@ export const siteData = {
         "rel": "icon",
         "href": "/junnian-blog/search.ico"
       }
+    ],
+    [
+      "script",
+      {},
+      "\n    var _hmt = _hmt || [];\n    (function(){\n      let hm = document.createElement(\"script\");\n      hm.src = \"https://hm.baidu.com/hm.js?1a7062b879a785e4c4c743ef69d9724e\";\n      console.log(\"hm: \",hm)\n      let s = document.getElementsByTagName(\"script\")[0]; \n      s.parentNode.insertBefore(hm, s);\n      console.log(\"s: \",s)\n    })();     \n    "
     ]
   ],
   "pages": [
+    {
+      "title": "Home",
+      "frontmatter": {
+        "home": true,
+        "heroImage": null,
+        "heroText": "主 标题",
+        "tagline": null,
+        "actionText": null,
+        "actionLink": "/zh/guide/",
+        "footer": "MIT Licensed | Copyright © 2022-present Evan You"
+      },
+      "regularPath": "/",
+      "relativePath": "README.md",
+      "key": "v-5da2a1fe",
+      "path": "/"
+    },
     {
       "title": "Amway",
       "frontmatter": {
@@ -73,62 +94,87 @@ export const siteData = {
       ]
     },
     {
-      "title": "设计模式",
+      "title": "HTML",
       "frontmatter": {},
-      "regularPath": "/basis/DesignPatterns.html",
-      "relativePath": "basis/DesignPatterns.md",
-      "key": "v-58f96035",
-      "path": "/basis/DesignPatterns.html",
+      "regularPath": "/basis/HTML.html",
+      "relativePath": "basis/HTML.md",
+      "key": "v-dc4affbe",
+      "path": "/basis/HTML.html",
       "headers": [
         {
           "level": 2,
-          "title": "单例模式",
-          "slug": "单例模式"
+          "title": "基础内容",
+          "slug": "基础内容"
+        },
+        {
+          "level": 2,
+          "title": "HTML5 内容",
+          "slug": "html5-内容"
         },
         {
           "level": 3,
-          "title": "类实现",
-          "slug": "类实现"
+          "title": "1. Audio、Video(多媒体支持)",
+          "slug": "_1-audio、video-多媒体支持"
         },
         {
           "level": 3,
-          "title": "闭包实现",
-          "slug": "闭包实现"
+          "title": "2. Web storage",
+          "slug": "_2-web-storage"
         },
         {
           "level": 3,
-          "title": "应用场景",
-          "slug": "应用场景"
+          "title": "3. 离线存储",
+          "slug": "_3-离线存储"
+        },
+        {
+          "level": 3,
+          "title": "4. WebSocket(双向通讯长链接)",
+          "slug": "_4-websocket-双向通讯长链接"
+        },
+        {
+          "level": 3,
+          "title": "5. Geolocation(地理位置 API)",
+          "slug": "_5-geolocation-地理位置-api"
+        },
+        {
+          "level": 3,
+          "title": "6. Communication（跨文档消息通信）",
+          "slug": "_6-communication-跨文档消息通信"
+        },
+        {
+          "level": 3,
+          "title": "7. Web Worker",
+          "slug": "_7-web-worker"
+        },
+        {
+          "level": 3,
+          "title": "8. requestAnimationFrame",
+          "slug": "_8-requestanimationframe"
+        },
+        {
+          "level": 3,
+          "title": "9. 摄像头",
+          "slug": "_9-摄像头"
+        },
+        {
+          "level": 3,
+          "title": "10. 全屏",
+          "slug": "_10-全屏"
+        },
+        {
+          "level": 3,
+          "title": "11. HTML5 拖放实现",
+          "slug": "_11-html5-拖放实现"
+        },
+        {
+          "level": 3,
+          "title": "12. 其它常见的 api",
+          "slug": "_12-其它常见的-api"
         },
         {
           "level": 2,
-          "title": "策略模式",
-          "slug": "策略模式"
-        },
-        {
-          "level": 2,
-          "title": "迭代器模式",
-          "slug": "迭代器模式"
-        },
-        {
-          "level": 2,
-          "title": "观察者模式",
-          "slug": "观察者模式"
-        },
-        {
-          "level": 2,
-          "title": "发布订阅模式",
-          "slug": "发布订阅模式"
-        },
-        {
-          "level": 2,
-          "title": "中介者模式",
-          "slug": "中介者模式"
-        },
-        {
-          "level": 2,
-          "title": "享元模式",
-          "slug": "享元模式"
+          "title": "pug",
+          "slug": "pug"
         }
       ]
     },
@@ -233,87 +279,62 @@ export const siteData = {
       ]
     },
     {
-      "title": "HTML",
+      "title": "设计模式",
       "frontmatter": {},
-      "regularPath": "/basis/HTML.html",
-      "relativePath": "basis/HTML.md",
-      "key": "v-dc4affbe",
-      "path": "/basis/HTML.html",
+      "regularPath": "/basis/DesignPatterns.html",
+      "relativePath": "basis/DesignPatterns.md",
+      "key": "v-58f96035",
+      "path": "/basis/DesignPatterns.html",
       "headers": [
         {
           "level": 2,
-          "title": "基础内容",
-          "slug": "基础内容"
+          "title": "单例模式",
+          "slug": "单例模式"
+        },
+        {
+          "level": 3,
+          "title": "类实现",
+          "slug": "类实现"
+        },
+        {
+          "level": 3,
+          "title": "闭包实现",
+          "slug": "闭包实现"
+        },
+        {
+          "level": 3,
+          "title": "应用场景",
+          "slug": "应用场景"
         },
         {
           "level": 2,
-          "title": "HTML5 内容",
-          "slug": "html5-内容"
-        },
-        {
-          "level": 3,
-          "title": "1. Audio、Video(多媒体支持)",
-          "slug": "_1-audio、video-多媒体支持"
-        },
-        {
-          "level": 3,
-          "title": "2. Web storage",
-          "slug": "_2-web-storage"
-        },
-        {
-          "level": 3,
-          "title": "3. 离线存储",
-          "slug": "_3-离线存储"
-        },
-        {
-          "level": 3,
-          "title": "4. WebSocket(双向通讯长链接)",
-          "slug": "_4-websocket-双向通讯长链接"
-        },
-        {
-          "level": 3,
-          "title": "5. Geolocation(地理位置 API)",
-          "slug": "_5-geolocation-地理位置-api"
-        },
-        {
-          "level": 3,
-          "title": "6. Communication（跨文档消息通信）",
-          "slug": "_6-communication-跨文档消息通信"
-        },
-        {
-          "level": 3,
-          "title": "7. Web Worker",
-          "slug": "_7-web-worker"
-        },
-        {
-          "level": 3,
-          "title": "8. requestAnimationFrame",
-          "slug": "_8-requestanimationframe"
-        },
-        {
-          "level": 3,
-          "title": "9. 摄像头",
-          "slug": "_9-摄像头"
-        },
-        {
-          "level": 3,
-          "title": "10. 全屏",
-          "slug": "_10-全屏"
-        },
-        {
-          "level": 3,
-          "title": "11. HTML5 拖放实现",
-          "slug": "_11-html5-拖放实现"
-        },
-        {
-          "level": 3,
-          "title": "12. 其它常见的 api",
-          "slug": "_12-其它常见的-api"
+          "title": "策略模式",
+          "slug": "策略模式"
         },
         {
           "level": 2,
-          "title": "pug",
-          "slug": "pug"
+          "title": "迭代器模式",
+          "slug": "迭代器模式"
+        },
+        {
+          "level": 2,
+          "title": "观察者模式",
+          "slug": "观察者模式"
+        },
+        {
+          "level": 2,
+          "title": "发布订阅模式",
+          "slug": "发布订阅模式"
+        },
+        {
+          "level": 2,
+          "title": "中介者模式",
+          "slug": "中介者模式"
+        },
+        {
+          "level": 2,
+          "title": "享元模式",
+          "slug": "享元模式"
         }
       ]
     },
@@ -336,6 +357,13 @@ export const siteData = {
           "slug": "更多内容"
         }
       ]
+    },
+    {
+      "frontmatter": {},
+      "regularPath": "/basis/JavaScript.html",
+      "relativePath": "basis/JavaScript.md",
+      "key": "v-966d2ac6",
+      "path": "/basis/JavaScript.html"
     },
     {
       "title": "学习路线",
@@ -363,29 +391,6 @@ export const siteData = {
           "slug": "二、js-部分"
         }
       ]
-    },
-    {
-      "title": "Home",
-      "frontmatter": {
-        "home": true,
-        "heroImage": null,
-        "heroText": "主 标题",
-        "tagline": null,
-        "actionText": null,
-        "actionLink": "/zh/guide/",
-        "footer": "MIT Licensed | Copyright © 2022-present Evan You"
-      },
-      "regularPath": "/",
-      "relativePath": "README.md",
-      "key": "v-5da2a1fe",
-      "path": "/"
-    },
-    {
-      "frontmatter": {},
-      "regularPath": "/basis/JavaScript.html",
-      "relativePath": "basis/JavaScript.md",
-      "key": "v-966d2ac6",
-      "path": "/basis/JavaScript.html"
     }
   ],
   "themeConfig": {
