@@ -14,6 +14,7 @@ module.exports = {
   },
   themeConfig: {
     nav,
+    lastUpdated: '最后更新日期', 
   },
-  plugins: ['@vuepress/back-to-top']
+  plugins: ['@vuepress/back-to-top','@vuepress/last-updated'],
 }
