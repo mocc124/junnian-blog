@@ -4,10 +4,10 @@
 export default {
   "v-5da2a1fe": () => import("C:\\Users\\Mrnianj\\Desktop\\Blog\\docs\\README.md"),
   "v-434e384c": () => import("C:\\Users\\Mrnianj\\Desktop\\Blog\\docs\\amway.md"),
-  "v-dc4affbe": () => import("C:\\Users\\Mrnianj\\Desktop\\Blog\\docs\\basis\\HTML.md"),
   "v-5be80026": () => import("C:\\Users\\Mrnianj\\Desktop\\Blog\\docs\\basis\\CSS.md"),
-  "v-58f96035": () => import("C:\\Users\\Mrnianj\\Desktop\\Blog\\docs\\basis\\DesignPatterns.md"),
+  "v-dc4affbe": () => import("C:\\Users\\Mrnianj\\Desktop\\Blog\\docs\\basis\\HTML.md"),
   "v-2a9646c7": () => import("C:\\Users\\Mrnianj\\Desktop\\Blog\\docs\\basis\\ReviewJacaScript.md"),
+  "v-8f224ac8": () => import("C:\\Users\\Mrnianj\\Desktop\\Blog\\docs\\path.md"),
   "v-966d2ac6": () => import("C:\\Users\\Mrnianj\\Desktop\\Blog\\docs\\basis\\JavaScript.md"),
-  "v-8f224ac8": () => import("C:\\Users\\Mrnianj\\Desktop\\Blog\\docs\\path.md") 
+  "v-58f96035": () => import("C:\\Users\\Mrnianj\\Desktop\\Blog\\docs\\basis\\DesignPatterns.md") 
 }

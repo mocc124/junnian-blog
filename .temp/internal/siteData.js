@@ -16,7 +16,7 @@ export const siteData = {
     [
       "script",
       {},
-      "\n    var _hmt = _hmt || [];\n    (function(){\n      let hm = document.createElement(\"script\");\n      hm.src = \"https://hm.baidu.com/hm.js?1a7062b879a785e4c4c743ef69d9724e\";\n      console.log(\"hm: \",hm)\n      let s = document.getElementsByTagName(\"script\")[0]; \n      s.parentNode.insertBefore(hm, s);\n      console.log(\"s: \",s)\n    })();     \n    "
+      "\n    var _hmt = _hmt || [];\n    (function(){\n      let hm = document.createElement(\"script\");\n      hm.src = \"https://hm.baidu.com/hm.js?1a7062b879a785e4c4c743ef69d9724e\";\n      let s = document.getElementsByTagName(\"script\")[0]; \n      s.parentNode.insertBefore(hm, s);\n    })();     \n    "
     ]
   ],
   "pages": [
@@ -90,91 +90,6 @@ export const siteData = {
           "level": 2,
           "title": "9. 工程化协作",
           "slug": "_9-工程化协作"
-        }
-      ]
-    },
-    {
-      "title": "HTML",
-      "frontmatter": {},
-      "regularPath": "/basis/HTML.html",
-      "relativePath": "basis/HTML.md",
-      "key": "v-dc4affbe",
-      "path": "/basis/HTML.html",
-      "headers": [
-        {
-          "level": 2,
-          "title": "基础内容",
-          "slug": "基础内容"
-        },
-        {
-          "level": 2,
-          "title": "HTML5 内容",
-          "slug": "html5-内容"
-        },
-        {
-          "level": 3,
-          "title": "1. Audio、Video(多媒体支持)",
-          "slug": "_1-audio、video-多媒体支持"
-        },
-        {
-          "level": 3,
-          "title": "2. Web storage",
-          "slug": "_2-web-storage"
-        },
-        {
-          "level": 3,
-          "title": "3. 离线存储",
-          "slug": "_3-离线存储"
-        },
-        {
-          "level": 3,
-          "title": "4. WebSocket(双向通讯长链接)",
-          "slug": "_4-websocket-双向通讯长链接"
-        },
-        {
-          "level": 3,
-          "title": "5. Geolocation(地理位置 API)",
-          "slug": "_5-geolocation-地理位置-api"
-        },
-        {
-          "level": 3,
-          "title": "6. Communication（跨文档消息通信）",
-          "slug": "_6-communication-跨文档消息通信"
-        },
-        {
-          "level": 3,
-          "title": "7. Web Worker",
-          "slug": "_7-web-worker"
-        },
-        {
-          "level": 3,
-          "title": "8. requestAnimationFrame",
-          "slug": "_8-requestanimationframe"
-        },
-        {
-          "level": 3,
-          "title": "9. 摄像头",
-          "slug": "_9-摄像头"
-        },
-        {
-          "level": 3,
-          "title": "10. 全屏",
-          "slug": "_10-全屏"
-        },
-        {
-          "level": 3,
-          "title": "11. HTML5 拖放实现",
-          "slug": "_11-html5-拖放实现"
-        },
-        {
-          "level": 3,
-          "title": "12. 其它常见的 api",
-          "slug": "_12-其它常见的-api"
-        },
-        {
-          "level": 2,
-          "title": "pug",
-          "slug": "pug"
         }
       ]
     },
@@ -279,6 +194,145 @@ export const siteData = {
       ]
     },
     {
+      "title": "HTML",
+      "frontmatter": {},
+      "regularPath": "/basis/HTML.html",
+      "relativePath": "basis/HTML.md",
+      "key": "v-dc4affbe",
+      "path": "/basis/HTML.html",
+      "headers": [
+        {
+          "level": 2,
+          "title": "基础内容",
+          "slug": "基础内容"
+        },
+        {
+          "level": 2,
+          "title": "HTML5 内容",
+          "slug": "html5-内容"
+        },
+        {
+          "level": 3,
+          "title": "1. Audio、Video(多媒体支持)",
+          "slug": "_1-audio、video-多媒体支持"
+        },
+        {
+          "level": 3,
+          "title": "2. Web storage",
+          "slug": "_2-web-storage"
+        },
+        {
+          "level": 3,
+          "title": "3. 离线存储",
+          "slug": "_3-离线存储"
+        },
+        {
+          "level": 3,
+          "title": "4. WebSocket(双向通讯长链接)",
+          "slug": "_4-websocket-双向通讯长链接"
+        },
+        {
+          "level": 3,
+          "title": "5. Geolocation(地理位置 API)",
+          "slug": "_5-geolocation-地理位置-api"
+        },
+        {
+          "level": 3,
+          "title": "6. Communication（跨文档消息通信）",
+          "slug": "_6-communication-跨文档消息通信"
+        },
+        {
+          "level": 3,
+          "title": "7. Web Worker",
+          "slug": "_7-web-worker"
+        },
+        {
+          "level": 3,
+          "title": "8. requestAnimationFrame",
+          "slug": "_8-requestanimationframe"
+        },
+        {
+          "level": 3,
+          "title": "9. 摄像头",
+          "slug": "_9-摄像头"
+        },
+        {
+          "level": 3,
+          "title": "10. 全屏",
+          "slug": "_10-全屏"
+        },
+        {
+          "level": 3,
+          "title": "11. HTML5 拖放实现",
+          "slug": "_11-html5-拖放实现"
+        },
+        {
+          "level": 3,
+          "title": "12. 其它常见的 api",
+          "slug": "_12-其它常见的-api"
+        },
+        {
+          "level": 2,
+          "title": "pug",
+          "slug": "pug"
+        }
+      ]
+    },
+    {
+      "title": "js ninja or js killer ?",
+      "frontmatter": {},
+      "regularPath": "/basis/ReviewJacaScript.html",
+      "relativePath": "basis/ReviewJacaScript.md",
+      "key": "v-2a9646c7",
+      "path": "/basis/ReviewJacaScript.html",
+      "headers": [
+        {
+          "level": 2,
+          "title": "基础内容",
+          "slug": "基础内容"
+        },
+        {
+          "level": 2,
+          "title": "更多内容",
+          "slug": "更多内容"
+        }
+      ]
+    },
+    {
+      "title": "学习路线",
+      "frontmatter": {
+        "sidebar": "auto"
+      },
+      "regularPath": "/path.html",
+      "relativePath": "path.md",
+      "key": "v-8f224ac8",
+      "path": "/path.html",
+      "headers": [
+        {
+          "level": 2,
+          "title": "一、HTML 部分",
+          "slug": "一、html-部分"
+        },
+        {
+          "level": 2,
+          "title": "二、CSS 部分",
+          "slug": "二、css-部分"
+        },
+        {
+          "level": 2,
+          "title": "二、JS 部分",
+          "slug": "二、js-部分"
+        }
+      ]
+    },
+    {
+      "frontmatter": {},
+      "regularPath": "/basis/JavaScript.html",
+      "relativePath": "basis/JavaScript.md",
+      "key": "v-966d2ac6",
+      "path": "/basis/JavaScript.html"
+    },
+    {
       "title": "设计模式",
       "frontmatter": {},
       "regularPath": "/basis/DesignPatterns.html",
@@ -335,60 +389,6 @@ export const siteData = {
           "level": 2,
           "title": "享元模式",
           "slug": "享元模式"
-        }
-      ]
-    },
-    {
-      "title": "js ninja or js killer ?",
-      "frontmatter": {},
-      "regularPath": "/basis/ReviewJacaScript.html",
-      "relativePath": "basis/ReviewJacaScript.md",
-      "key": "v-2a9646c7",
-      "path": "/basis/ReviewJacaScript.html",
-      "headers": [
-        {
-          "level": 2,
-          "title": "基础内容",
-          "slug": "基础内容"
-        },
-        {
-          "level": 2,
-          "title": "更多内容",
-          "slug": "更多内容"
-        }
-      ]
-    },
-    {
-      "frontmatter": {},
-      "regularPath": "/basis/JavaScript.html",
-      "relativePath": "basis/JavaScript.md",
-      "key": "v-966d2ac6",
-      "path": "/basis/JavaScript.html"
-    },
-    {
-      "title": "学习路线",
-      "frontmatter": {
-        "sidebar": "auto"
-      },
-      "regularPath": "/path.html",
-      "relativePath": "path.md",
-      "key": "v-8f224ac8",
-      "path": "/path.html",
-      "headers": [
-        {
-          "level": 2,
-          "title": "一、HTML 部分",
-          "slug": "一、html-部分"
-        },
-        {
-          "level": 2,
-          "title": "二、CSS 部分",
-          "slug": "二、css-部分"
-        },
-        {
-          "level": 2,
-          "title": "二、JS 部分",
-          "slug": "二、js-部分"
         }
       ]
     }

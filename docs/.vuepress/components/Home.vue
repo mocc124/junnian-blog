@@ -19,7 +19,8 @@
 </template>
 
 <script>
-  import axios from "axios"
+  import hitokoto_v1 from '../axios/index';
+
   export default {
     data() {
       return {
@@ -32,38 +33,20 @@
       }
     },
     mounted() {
-      this.initServe()
-      // this.get({c:"i",c:"d",c:"k"}).then(res=>{
-      //   let {from,from_who,hitokoto} = res.data
-      //   this.sentence = {from,from_who,hitokoto}
-      // })
+      this.init()
     },
     methods:{
-      initServe() {
-        this.server = axios.create({
-          baseURL: "https://v1.hitokoto.cn", timeout: 5000,
-        });
+      init() {
+        let query = {c:"i",c:"d",c:"k"}
+        hitokoto_v1.get(query).then(res=>{
+          let {from,from_who,hitokoto} = res.data
+          this.sentence = {from,from_who,hitokoto}
+        })
       },
-      get(query) {
-        try {
-          if (query ?? false) { 
-            if (Object.prototype.toString.call(query) !== '[object String]') { 
-              return this.server({
-                url: "/",
-                method: 'get',
-                params: {...query}
-              })
-            }
-            return this.server({
-                url: "/?" + query,
-                method: 'get',
-            })
-          }
-          throw new TypeError(`${query} 类型错误`)
-        } catch (error) {
-          throw new TypeError(error)
-        }
-      }
+    },
+    errorCaptured(err,vm,info) {
+      console.log(`cat EC: ${err.toString()}\ninfo: ${info}`); 
+      return false;
     }
   }
 </script>
