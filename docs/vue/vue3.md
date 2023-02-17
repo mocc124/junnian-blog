@@ -512,3 +512,179 @@ export default function(options:Options):Promise<{baseUrl:string}> {
     })
 };
 ```
+
+## 第二十九章 Vue3定义全局函数/变量
+
+vue2中通过prototype属性在原型上定义全局属性，vue3中没有prorotype属性使用app.config.gloableProperties代替。
+```vue
+<!-- Vue2.x中 -->
+Vue.prototype.$xxx = ()=>{}
+
+<!-- Vue3.x中 -->
+const app = createApp({})
+app.config.gloableProperties.$xxx = ()=>{}
+```
+
+注意需要为vue扩充类型：
+```vue
+<script setup lang="ts">
+import {getCurrentInstance} from 'vue'
+
+// js中读取
+const app = getCurrentInstance()
+console.log(app?.proxy?.$filters.format('js'))
+</script>
+
+<template>
+  {{ $glbData }}
+</template>
+```
+
+main.ts
+```ts
+import { createApp } from 'vue'
+import './style.css'
+import App from './App.vue'
+
+const app = createApp(App)
+
+app.config.globalProperties.$glbData = {a:1,b:2}
+app.config.globalProperties.$filters = {
+    format<T extends any>(str: T): string {
+        return `$${str}`
+    }
+}
+
+type Filter = {
+    format<T>(str: T): string,
+}
+ 
+// 声明要扩充@vue/runtime-core包的声明.
+// 这里扩充"ComponentCustomProperties"接口, 因为他是vue3中实例的属性的类型.
+declare module 'vue' {
+    export interface ComponentCustomProperties {
+        $filters: Filter,
+        $glbData:object
+    }
+}
+ 
+app.mount('#app')
+```
+
+[源码讲解](https://www.bilibili.com/video/BV1dS4y1y7vd/?p=40&share_source=copy_web&vd_source=461186b903c28eeeb1342b31e0bfe68e&t=284)
+
+## 第三十章 Vue插件
+
+关于[插件](https://cn.vuejs.org/guide/reusability/plugins.html)，Vue插件底层是利用了app.config.globalProperties实现全局的插件。而[awesome-vue](https://github.com/vuejs/awesome-vue#components--libraries) 集合了大量第三方贡献的插件和库供查阅使用。
+
+常见应用场景：全局消息提示组件、全局搜索等
+
+### 实现全局loading组件效果
+
+components/Loading/Loading.vue
+```vue
+<template>
+    <div v-if="isShow" class="container">
+        <p>Loading ...</p>
+    </div>
+</template>
+
+<script lang="ts" setup>
+import { ref } from "vue";
+
+let isShow = ref<boolean>(false)
+
+const show = ()=>{isShow.value = true}
+const hide = ()=>{isShow.value = false}
+
+// 通过defineExpose抛出的，可以被读取到
+defineExpose({
+    isShow,
+    show,
+    hide
+})
+</script>
+
+<style acoped>
+.container {
+    position: absolute;
+    left: 0;
+    top: 0;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    background-color: #ccc;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+}
+</style>
+```
+
+components/Loading/index.ts
+```ts
+import { createVNode,render  } from "vue";
+import type { App,VNode} from "vue";
+import Loading from "./Loading.vue";
+
+export default  {
+    install(app:App) {
+        let Vnode:VNode = createVNode(Loading)
+        render(Vnode,document.body)
+        // 注意：如果引入了element-ui，此处的$loading可能会冲突
+        app.config.globalProperties.$loading = {
+            show:Vnode.component?.exposed?.show,
+            hide:Vnode.component?.exposed?.hide
+        }
+
+        // 调用方式
+        // app.config.globalProperties.$loading.show()
+    }
+};
+```
+
+main.ts
+```ts
+import { createApp } from 'vue'
+import './style.css'
+import App from './App.vue'
+import Loading from "./components/Loading";
+
+const app = createApp(App)
+
+// 使用插件
+app.use(Loading)
+
+type Lod = {
+    show: () => void,
+    hide: () => void,
+    isShow?: boolean
+}
+//编写ts loading 声明文件放置报错 和 智能提示
+declare module '@vue/runtime-core' {
+    export interface ComponentCustomProperties {
+        $loading: Lod
+    }
+}
+
+app.mount('#app')
+```
+
+组件中使用
+```vue
+<script lang="ts" setup>
+import { getCurrentInstance,onMounted } from "vue";
+
+let instance = getCurrentInstance();
+instance?.proxy?.$loading.show()
+
+setTimeout(()=>{
+   instance?.proxy?.$loading.hide()
+},3000)
+</script> 
+```
+
+[Vue.use 源码讲解](https://www.bilibili.com/video/BV1dS4y1y7vd/?p=41&share_source=copy_web&vd_source=461186b903c28eeeb1342b31e0bfe68e&t=706)
+
+
