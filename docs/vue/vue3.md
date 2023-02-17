@@ -379,7 +379,7 @@ Vue3指令的钩子函数
 
 补充：Vue2 指令 bind inserted update componentUpdated unbind
 
-按钮级别鉴权示例:
+### 按钮级别鉴权示例:
 ```vue
 <script setup lang="ts">
 import type {Directive} from "vue";
@@ -409,4 +409,106 @@ const vHasShow:Directive<HTMLElement,string> = (el,bingding)=>{
     <button v-has-show="'home:delete'">删除</button>
   </div>
 </template>
+```
+
+### 利用自定义指令实现拖拽效果示例：
+```vue
+<script setup lang="ts">
+import {ref,Directive,DirectiveBinding} from 'vue'
+
+const vMove = (el:HTMLElement,bing:DirectiveBinding)=>{
+  let headerElement:HTMLElement = el.firstElementChild as HTMLElement
+  headerElement.addEventListener("mousedown",(e:MouseEvent)=>{
+    let X = e.clientX-el.offsetLeft
+    let Y = e.clientY-el.offsetTop
+    const move = (e:MouseEvent)=>{
+      el.style.left = e.clientX-X+"px"
+      el.style.top = e.clientY-Y+"px"
+    }
+    document.addEventListener('mousemove',move)
+    document.addEventListener('mouseup',()=>{
+      document.removeEventListener("mousemove",move)
+    })
+  })
+  
+}
+</script>
+
+<template>
+  <div v-move class="card">
+    <header>这是头部区域</header>
+    <main>这是内容区域这是内容区域这是内容区域</main>
+  </div>
+</template>
+
+<style scoped>
+.card {
+  position: absolute;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: aliceblue;
+}
+.card header {
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 10px;
+}
+</style>
+```
+
+## 第二十八章 自定义Hooks
+
+hook 主要是用来处理复用代码逻辑的封装，[vue2中的Mixins](https://v2.cn.vuejs.org/v2/guide/mixins.html)也可以将多个相同的逻辑抽离出来，需要的组件引入mixins就可以实现代码的复用，但mixins有劣势：
+弊端1：就是涉及到覆盖的问题（组件的data、methods、filters优先级更高，也就是mixins中的生命周期钩子在组件生命周期钩子之前调用）。
+弊端2：组件引入mixins后，变量来源不明确，不利于阅读，维护困难。
+
+hook的代表：[VueUse](https://vueuse.org/)
+
+利用hoke实现图片转base64示例：
+```vue
+<script setup lang="ts">
+// import xxxVue from ''
+import {ref,Directive,DirectiveBinding} from 'vue'
+import useBase64 from "./hooks/base64";
+
+const imgUrl = '/img/1.png'
+
+useBase64({el:"#img"}).then(data=>{
+  console.log(data);
+})
+</script>
+
+<template>
+  <img id="img" alt="err" :src="imgUrl">
+</template>
+```
+
+base64.ts
+```ts
+import { onMounted } from "vue";
+
+type Options = {
+    el:string
+}
+
+function base64(el:HTMLImageElement) {
+    const canvas = document.createElement('canvas')   
+    const ctx = canvas.getContext('2d')
+    canvas.width = el.width
+    canvas.height = el.height
+    ctx?.drawImage(el,0,0,canvas.width,canvas.height)
+    return canvas.toDataURL('image/png')
+}
+
+export default function(options:Options):Promise<{baseUrl:string}> {
+    return new Promise(resolve =>{
+        onMounted(()=>{
+            let img:HTMLImageElement = document.querySelector(options.el||'') as HTMLImageElement
+            img.onload = ()=>{
+                resolve({
+                    baseUrl:base64(img)
+                })
+            }
+        })
+    })
+};
 ```
