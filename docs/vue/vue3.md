@@ -759,4 +759,161 @@ main {
 
 [样式穿透源码讲解 0503](https://www.bilibili.com/video/BV1dS4y1y7vd/?p=43&share_source=copy_web&vd_source=461186b903c28eeeb1342b31e0bfe68e&t=300)
 
+## 第三十三章 css style完整新特性
+
+### 插槽选择器
+应用场景：封装子组件，子组件中指定插槽中的样式
+```vue
+<template>
+<main>
+    <el-input v-model="input" placeholder="Please input" class="ipt"/>
+    <slot>
+        <span>默认内容</span>
+    </slot>
+</main>
+</template>
+
+<script lang="ts" setup>
+import { ref } from "vue";
+
+let input = ref('')
+</script>
+
+<style lang="less" scoped>
+main {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 155, 155, .1);
+  padding: 10%;
+  box-sizing: border-box;
+}
+
+// 子组件指定插槽样式
+:slotted(.default-slot ) {
+    color: tomato;
+}
+</style>
+```
+
+父组件中需要指定类名样式才可以生效
+```html
+<A>
+  <span class="default-slot">XXX</span>
+</A>
+```
+
+### 全局选择器（慎用）
+
+第一种：vue允许一个组件中出现多个style标签，但只能存在一个setup属性的style标签，因此在style标签中的样式不会被PostCss插件处理，会成为全局样式
+
+第二种：vue新增了:global，可以在有scoped属性的style标签中指定全局样式
+```vue
+<style lang="less" scoped>
+:global(body) {
+  margin: 0;
+  padding: 0;
+}
+</style>
+```
+
+### 动态class
+
+实现样式的动态控制
+```vue
+<template>
+  <div class="red">RED</div>
+  <div class="blue">BLUE</div>
+</template>
+
+<script lang="ts" setup>
+import { ref,reactive } from "vue";
+import A from "./components/A.vue";
+
+let color = ref('red')
+let style = reactive({
+  color:"blue"
+})
+
+setTimeout(() => {
+  color.value = "green"
+  style.color = 'green'
+}, 2000);
+</script>
+
+<style lang="less" scoped>
+.red {
+  color: v-bind(color);
+}
+.blue {
+  color: v-bind("style.color");
+}
+</style>
+```
+
+### css module
+
+示例：
+```vue
+<template>
+  <!-- 默认 module ，应用单个样式 -->
+  <div :class="$style.div">css module</div>
+  <!-- 应用多个样式 -->
+  <div :class="[$style.div,$style.border]">css module</div>
+</template>
+
+<style module>
+.div {
+  color: #ccc;
+}
+.border {
+  border: 1px solid tomato;
+}
+</style>
+```
+
+css module 命名导出方式
+```vue
+<template>
+  <div :class="nor.div">css module</div>
+</template>
+
+<style module='nor'>
+.div {
+  color: #ccc;
+}
+.border {
+  border: 1px solid tomato;
+}
+</style>
+```
+
+### css hooks
+
+css hooks多应用于jsx等
+```vue
+<template>
+  <!-- 默认 module ，应用单个样式 -->
+  <div :class="pro.div">css module</div>
+  <!-- 应用多个样式 -->
+  <div :class="[pro.div,pro.border]">css module</div>
+</template>
+
+<script lang="ts" setup>
+import { useCssModule } from "vue";
+
+let style = useCssModule('pro')
+
+console.log(style.div);
+</script>
+
+<style module="pro">
+.div {
+  color: #ccc;
+}
+.border {
+  border: 1px solid tomato;
+}
+</style>
+```
+
 
