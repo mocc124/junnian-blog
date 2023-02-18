@@ -16,8 +16,9 @@ sidebar: auto
 ## 二、CSS 部分
 
 [MDN-CSS 基础](https://developer.mozilla.org/zh-CN/docs/Learn/Getting_started_with_the_web/CSS_basics)
-[MDN CSS 部分](https://developer.mozilla.org/zh-CN/docs/Web/CSS)
+[MDN CSS 深入部分](https://developer.mozilla.org/zh-CN/docs/Web/CSS)
 [CSS3 预览](./basis/CSS.md)
+[CSS 常见布局手册](https://developer.mozilla.org/zh-CN/docs/Web/CSS/Layout_cookbook)
 
 ## 二、JS 部分
 
