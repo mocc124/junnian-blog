@@ -687,4 +687,76 @@ setTimeout(()=>{
 
 [Vue.use 源码讲解](https://www.bilibili.com/video/BV1dS4y1y7vd/?p=41&share_source=copy_web&vd_source=461186b903c28eeeb1342b31e0bfe68e&t=706)
 
+## 第三十一章 UI 库
+- 首选 [element-ui](https://element-plus.gitee.io/zh-CN/)，因为是setup语法糖模式+TS风格
+- 次选 [ant design](https://www.antdv.com/docs/vue/introduce-cn)，setup函数模式
+- 备选 [iview](https://www.iviewui.com/)，使用的是options api风格+js
+- [Vant](https://vant-contrib.gitee.io/vant/#/zh-CN/home)
+
+区别：element提供了vscode volar插件的语法支持，antd表单元素提供了分页，而如果使用element则需要自己去封装表单分页。vant 则是移动端开发，尤其是移动端电商项目首选这个。
+
+element使用流程：
+1. 安装：npm/yarn 包管理器安装依赖
+2. 引入配置：选择全量引入或按需引入
+3. 配置volar插件（非vscode编辑器可跳过）
+4. 引入组件
+
+## 第三十二章 scoped和样式传统
+
+因为Vue是单页面应用，因此需要做css模块化，否则会造成样式混乱。scoped可以做到样式私有化的作用。scoped原理（渲染规则）如下：
+1. 给HTML的DOM节点添加一个不重复的data属性，如data-v-6b8c1表示唯一性
+2. 在每句CSS样式选择器末尾（编译后的css语句）添加一个当前组件的data属性选择器（#id[data-v-xxx]:{}）来私有化样式
+3. 若组件内部包含有其他组件，只会给其他组件的最外层标签添加当前组件的data属性
+
+因此请注意，下面的这个示例：
+```vue
+<template>
+  <main>
+    <el-input v-model="input" placeholder="Please input" class="ipt"/>
+  </main>
+</template>
+
+<script lang="ts" setup>
+import { ref } from "vue";
+
+let input = ref('')
+</script>
+
+<style lang="less" scoped>
+main {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 155, 155, .1);
+  padding: 10%;
+  box-sizing: border-box;
+}
+
+// 这里的样式不能被命中子组件中的元素
+.el-input__wrapper {
+  background-color: tomato;
+}
+</style>
+```
+根据第三点：若组件内部包含有其他组件，只会给其他组件的最外层标签添加当前组件的data属性，input不会被添加data-v-xxx的属性，因此不会被css选择器命中，导致样式失效。
+
+因此，vue提供了样式传透的机制：
+
+```css
+/* vue2中使用 `/deep/` 修饰符: */
+/deep/ .ipt {
+  /* ... */
+}
+```
+
+```css
+/* vue2中使用 `:deep()` 修饰符: */
+:deep(.ipt)  {
+  /* ... */
+}
+```
+
+原理：将 data-v-xxx 属性，移动至:deep() 生命时的上一级样式属性选择器，底层是使用[Post Css](https://www.postcss.com.cn)插件实现，类似与babel，将css转化为AST，循坏解析AST，并添加自定义属性（挪动属性选择器位置）。
+
+[样式穿透源码讲解 0503](https://www.bilibili.com/video/BV1dS4y1y7vd/?p=43&share_source=copy_web&vd_source=461186b903c28eeeb1342b31e0bfe68e&t=300)
+
 
