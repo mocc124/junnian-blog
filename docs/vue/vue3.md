@@ -925,7 +925,7 @@ console.log(style.div);
 优点：无需命名，开箱即用、体积小、兼容移动端、支持响应式
 缺点：增加心智负担、污染HTML结构
 
-post CSS处理Tailwind CSS大致流程
+Post CSS处理Tailwind CSS大致流程
 1. 将CSS解析为AST抽象语法树
 2. 读取插件配置，根据配置文件生成新的抽象语法树
 3. 将AST树传递给一系列数据转换操作处理（变量数据循环生成，切套类名循环）
@@ -958,3 +958,116 @@ module.exports = {
 }
 ```
 
+## 第三十五章 Event Loop 和 nextTick
+
+JS是单线程语言，单线程的好处是不用考虑同步的问题，避免了线程复杂和保证了线程安全。但只能同步执行肯定是不能满足需求的，所以 JS 有了一个用来实现异步的函数：setTimeout。
+
+### Event Loop:
+需要先了解两个数据结构：
+- 队列（Queue）：先进先出，类似于排队，先排的人最先被提供服务
+- 栈（Stack）：先进后出，类似于向箱子里放东西，最后放置的在最顶层，也会最先被取出来
+- 调用栈（Call Stack）：也是栈，不过里面放的是函数
+- Event Table: 存储 JavaScript 中的异步事件 (request, setTimeout, IO等) 及其对应的回调函数的列表，可以理解为一张 事件->回调函数 对应表
+- Event Queue：回调函数队列，也叫 Callback Queue，当 Event Table 中的事件被触发，事件对应的 回调函数 就会被 push 进这个 Event Queue，然后等待被执行
+
+同步任务和异步任务：
+- 同步任务：代码按照自上而下的顺序依次执行
+- 异步任务（又分为宏任务和微任务，微任务执行栈被清空才会执行宏任务）
+  - 微任务：Promise.then/catch/finally、MutationObserver、process.nextTick(Node.js环境)
+  - 宏任务：Script、setTimeout、setInteval、UI交互事件、postMessage、Ajax
+  
+![EventLoop](/EventLoop.png)
+
+1. 开始，任务先进入 Call Stack
+2. 同步任务直接在栈中等待被执行，异步任务从 Call Stack 移入到 Event Table 注册
+3. 当对应的事件触发（或延迟到指定时间），Event Table 会将事件回调函数移入 Event Queue 等待
+4. 当 Call Stack 中没有任务，就从 Event Queue 中拿出一个任务放入 Call Stack
+
+也就是说Event Loop 会一直检查 Call Stack 中是否有函数需要执行，如果有，就从栈顶依次执行。同时，如果执行的过程中发现其他函数，继续入栈然后执行。
+
+示例：
+```js
+console.log(1)
+setTimeout(()=>{
+  console.log(2)
+},0)
+
+const p = new Promise((resolve,reject)=>{
+  console.log(3)
+  resolve(1000)
+  console.log(4)
+})
+
+p.then(data=>{
+  console.log(data)
+})
+
+console.log(5)
+/*
+  1. 先执行同步代码，log(1)、new Promise、log(5)
+  2. 同步代码执行结束，检查微任务队列，执行p.then，微任务队列执行完毕，再次检查微任务队列（循环执行），直到微任务队列被清空
+  3. 微任务队列清空后，执行宏任务队列，log(2)
+  执行结果： 1 3 4 5 1000 2
+*/ 
+```
+
+思考下面这段代码的执行顺序:
+```js
+async function Prom() {
+	console.log('Y');
+	await Promise.resolve()
+	console.log('X');
+}
+
+setTimeout(()=>{
+	console.log(1);
+	Promise.resolve().then(()=>{
+		console.log(2);
+	})
+},0)
+setTimeout(()=>{
+	console.log(3);
+	Promise.resolve().then(()=>{console.log(4);})
+},0)
+
+Promise.resolve().then(()=>{
+	console.log(5);
+})
+Promise.resolve().then(()=>{
+	console.log(6);
+})
+Promise.resolve().then(()=>{
+	console.log(7);
+})
+Promise.resolve().then(()=>{
+	console.log(8);
+})
+
+Prom()
+console.log(0);
+```
+
+### nextTick
+
+Vue的mvvm模型中，更新DOM是有策略的，并不是同步的。nextTick 可以接收一个函数做为入参，nextTick 执行后能拿到最新的数据。
+
+[nextTick](https://cn.vuejs.org/api/general.html#nexttick)可以在下次 DOM 更新循环结束之后执行延迟回调。在修改数据之后立即使用这个方法，获取更新后的 DOM。底层实现利用了Event Loop。
+
+示例：
+```vue
+<script lang='ts' setup>
+import { createApp, nextTick } from 'vue'
+const app = createApp({
+  setup() {
+    const message = ref<string>('Hello!')
+    const changeMessage = async newMessage => {
+      message.value = newMessage
+      // 这里获取DOM的value是旧值
+      await nextTick()
+      // nextTick 后获取DOM的value是更新后的值
+      console.log('Now DOM is updated')
+    }
+  }
+})
+</script>
+```
