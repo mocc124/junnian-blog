@@ -917,3 +917,44 @@ console.log(style.div);
 ```
 
 
+
+## 第三十四章 Tailwind CSS
+
+[Tailwind CSS](https://www.tailwindcss.cn/)是基于post CSS解析，js编写的CSS框架。
+
+优点：无需命名，开箱即用、体积小、兼容移动端、支持响应式
+缺点：增加心智负担、污染HTML结构
+
+post CSS处理Tailwind CSS大致流程
+1. 将CSS解析为AST抽象语法树
+2. 读取插件配置，根据配置文件生成新的抽象语法树
+3. 将AST树传递给一系列数据转换操作处理（变量数据循环生成，切套类名循环）
+4. 清除一系列操作留下的数据痕迹
+5. 将处理完毕的AST树重新转换成字符串
+
+### 基本使用
+
+[在 Vue 3 和 Vite 安装 Tailwind CSS](https://www.tailwindcss.cn/docs/guides/vue-3-vite)
+
+需要注意：如果是安装了Tailwind CSS 2.x版本的按照文档上的配置（生产环境这些类名不会被打包）
+```js
+module.exports = {
+  purge: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+}
+```
+
+Tailwind CSS 3.x的版本配置如下：
+```js
+module.exports = {
+  content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+}
+```
+
