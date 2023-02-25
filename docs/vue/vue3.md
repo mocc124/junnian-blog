@@ -1011,7 +1011,7 @@ console.log(5)
 */ 
 ```
 
-思考下面这段代码的执行顺序:
+面试题1：
 ```js
 async function Prom() {
 	console.log('Y');
@@ -1047,11 +1047,20 @@ Prom()
 console.log(0);
 ```
 
+面试题2：
+```js
+for(var i=0;i<5;i++) {
+  setTimeout(()=>{
+    console.log(i) // ?
+  }) 
+}
+```
+
 ### nextTick
 
 Vue的mvvm模型中，更新DOM是有策略的，并不是同步的。nextTick 可以接收一个函数做为入参，nextTick 执行后能拿到最新的数据。
 
-[nextTick](https://cn.vuejs.org/api/general.html#nexttick)可以在下次 DOM 更新循环结束之后执行延迟回调。在修改数据之后立即使用这个方法，获取更新后的 DOM。底层实现利用了Event Loop。
+[nextTick](https://cn.vuejs.org/api/general.html#nexttick)可以在下次 DOM 更新循环结束之后执行延迟回调。在修改数据之后立即使用这个方法，获取更新后的 DOM。nextTick底层实现利用了Event Loop。
 
 示例：
 ```vue
@@ -1063,6 +1072,7 @@ const app = createApp({
     const changeMessage = async newMessage => {
       message.value = newMessage
       // 这里获取DOM的value是旧值
+      console.log('Now DOM is updated')
       await nextTick()
       // nextTick 后获取DOM的value是更新后的值
       console.log('Now DOM is updated')
@@ -1071,3 +1081,8 @@ const app = createApp({
 })
 </script>
 ```
+
+[源码讲解](https://www.bilibili.com/video/BV1dS4y1y7vd/?p=47&share_source=copy_web&vd_source=461186b903c28eeeb1342b31e0bfe68e&t=91)
+
+
+
