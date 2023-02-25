@@ -1085,4 +1085,12 @@ const app = createApp({
 [源码讲解](https://www.bilibili.com/video/BV1dS4y1y7vd/?p=47&share_source=copy_web&vd_source=461186b903c28eeeb1342b31e0bfe68e&t=91)
 
 
+### Vue开发移动端
+
+开发移动端最常见的问题是适配各种尺寸的移动设备。之前使用的是rem（更具HTML font-size去做缩放），现在更多的是使用vw、vh（根据视口进行缩放），vw和vh会将视口分为一百份，元素根据此比例进行布局。
+
+
+解决方案1：[postcss-px-to-viewport](https://github.com/evrone/postcss-px-to-viewport)
+
+
 
