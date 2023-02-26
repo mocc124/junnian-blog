@@ -1217,3 +1217,83 @@ h函数接受3个参数：
   }
 </script>
 ```
+
+## 第三十九章 Vue开发桌面程序 Electron
+
+[Electron](https://www.electronjs.org/)内置了 Chromium 和 nodeJS 其中 Chromium 是渲染进程，要渲染和解析HTML，Nodejs作为主进程，其中管道用IPC 通信。
+
+[文字版讲解](https://xiaoman.blog.csdn.net/article/details/126063804)、
+[视频讲解](https://www.bilibili.com/video/BV1dS4y1y7vd)
+
+## 第四十章 响应式语法糖
+
+[响应性语法糖 $ref](https://cn.vuejs.org/guide/extras/reactivity-transform.html#refs-vs-reactive-variables)要求 vue 3.2.25 及以上版本
+
+注意：现在处于实验阶段，正式环境慎用
+
+vite 配置：
+```js
+import { fileURLToPath, URL } from 'node:url'
+
+import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
+import vueJsx from '@vitejs/plugin-vue-jsx'
+
+// https://vitejs.dev/config/
+export default defineConfig({
+  plugins: [vue({
+    reactivityTransform:true // 开启 reactivityTransform
+  }), vueJsx()],
+  resolve: {
+    alias: {
+      '@': fileURLToPath(new URL('./src', import.meta.url))
+    }
+  }
+})
+```
+
+## 第四十一章 了解 docker
+
+应用场景：要求维护四个项目，每个项目 node版本不同 框架不同 这很头疼，docker可以解决这个问题。
+
+安装：[Developers - Docker](https://www.docker.com/get-started/)
+
+docker 分几个概念：镜像、容器、仓库
+- 镜像：类似于装机时候需要的系统盘或者系统镜像文件，这里它负责创建docker容器的，有很多官方现成的镜像：node、mysql、monogo、nginx可以从远程仓库下载
+- 容器：容器特别像一个虚拟机，容器中运行着一个完整的操作系统。可以在容器中装 Nodejs，可以执行npm install，可以做一切你当前操作系统能做的事情
+- 仓库：仓库就像是 github 那样的，我们可以制作镜像然后 push 提交到云端的仓库，也可以从仓库 pull 下载镜像
+
+
+配置docker的国内镜像：
+```js
+"registry-mirrors": [
+  http://hub-mirror.c.163.com",
+  https://docker.mirrors.ustc.edu.cn",
+  https://registry.docker-cn.com"
+],
+```
+
+## 第四十二章 配置环境变量
+
+[环境变量](https://cn.vitejs.dev/guide/env-and-mode.html#env-variables)的作用:让开发者区分不同的运行环境，来实现兼容开发和生产。如 `npm run dev` 就是开发环境 ，`npm run build` 就是生产环境等等。
+
+使用Vite构建的项目，可以使用 import.meta.env 对象获取暴露的环境变量。如下：
+```
+{
+  "BASE_URL":"/", //部署时的URL前缀
+  "MODE":"development", //运行模式
+  "DEV":true,"  //是否在dev环境
+  PROD":false, //是否是build 环境
+  "SSR":false //是否是SSR 服务端渲染模式
+}
+```
+
+注意：不能使用动态赋值的方式，如 import.meta.env[key]赋值，因为这些环境变量在打包的时候是会被硬编码的方式通过 JSON.stringify 注入浏览器中。
+
+需要在根目录 .env.[name] 文件中配置额外的环境变量，如新建 .env.development 配置开发环境变量 ；.env.production 配置生产环境变量 。内容如下：
+```
+VITE_HTTP = http://www.baidu.com
+VITE_IP = 180.101.50.242
+```
+
+在vite.config.js中使用环境变量请参考:[链接](https://www.bilibili.com/video/BV1dS4y1y7vd/?p=53&share_source=copy_web&vd_source=461186b903c28eeeb1342b31e0bfe68e&t=531)
