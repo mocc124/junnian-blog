@@ -1085,7 +1085,7 @@ const app = createApp({
 [源码讲解](https://www.bilibili.com/video/BV1dS4y1y7vd/?p=47&share_source=copy_web&vd_source=461186b903c28eeeb1342b31e0bfe68e&t=91)
 
 
-### Vue开发移动端以及打包apk
+## 第三十六章 Vue开发移动端以及打包apk
 
 开发移动端最常见的问题是适配各种尺寸的移动设备。之前使用的是rem（更具HTML font-size去做缩放），现在更多的是使用vw、vh（根据视口进行缩放），vw和vh会将视口分为一百份，元素根据此比例进行布局。
 
@@ -1128,4 +1128,17 @@ export default defineConfig({
 2. 原声安卓+webview
 3. flutter 实现，参考[闲鱼](https://www.infoq.cn/article/xianyu-cross-platform-based-on-flutter)
 
+## 第三十七章 unocss 原子化构想
+[UnoCSS](https://venerable-strudel-d42cce.netlify.app/)是一个原子化 CSS 引擎，而不是一个框架。相较于[tailwind css](https://www.tailwindcss.cn/)更加灵活并注重性能。
+
+参考链接[unocss原子化](https://xiaoman.blog.csdn.net/article/details/125650172)，具体详见官网。
+
+## 第三十八章 函数式编程
+
+Vue常见的有template、和JSX编码风格，但还有第三种函数式编码风格。主要核心是h函数，
+
+h函数接受3个参数：
+- type 元素的类型
+- propsOrChildren 数据对象, 这里主要表示(props, attrs, dom props, class 和 style)
+- children 子节点
 
