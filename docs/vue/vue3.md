@@ -1085,12 +1085,47 @@ const app = createApp({
 [源码讲解](https://www.bilibili.com/video/BV1dS4y1y7vd/?p=47&share_source=copy_web&vd_source=461186b903c28eeeb1342b31e0bfe68e&t=91)
 
 
-### Vue开发移动端
+### Vue开发移动端以及打包apk
 
 开发移动端最常见的问题是适配各种尺寸的移动设备。之前使用的是rem（更具HTML font-size去做缩放），现在更多的是使用vw、vh（根据视口进行缩放），vw和vh会将视口分为一百份，元素根据此比例进行布局。
 
-
 解决方案1：[postcss-px-to-viewport](https://github.com/evrone/postcss-px-to-viewport)
 
+第一步：安装依赖：`npm install postcss-px-to-viewport --save-dev`
+
+第二步：配置基本参数：
+```json
+import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
+import pxtoViewPort from "postcss-px-to-viewport";
+
+// https://vitejs.dev/config/
+export default defineConfig({
+  plugins: [vue()],
+  css:{
+    postcss:{
+      plugins:[
+        pxtoViewPort({
+          unitToConvert: "px",      //要转换的单位
+          viewPortWidth: "1920",    //viewPort的宽度
+          viewPortHeight: "1080",   //viewPort的高度
+          unitPrecision: 3,         //指定px转换为视图单位值的小数位数
+          selectorBlackList: ['.ignore','.hairlines'],    //指定不转换成目标视图单位的类
+          minPixelValue: 1,        //最小阈值，小于等于该值时不转换
+          mediaQuery:false         //是否在媒体查询时也转换为目标视图单位
+        })
+      ]
+    }
+  }
+})
+```
+注意：低版本vite 可能需要声明文件，请参考这篇文章:[Vue如何开发移动端](https://xiaoman.blog.csdn.net/article/details/125490078)
+
+第三步：正常开发即可，此插件会将px单位自动转换为vw、vh单位
+
+#### vue打包apk文件
+1. 借助 HBuilder 云打包（排队）
+2. 原声安卓+webview
+3. flutter 实现，参考[闲鱼](https://www.infoq.cn/article/xianyu-cross-platform-based-on-flutter)
 
 
