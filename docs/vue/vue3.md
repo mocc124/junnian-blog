@@ -936,7 +936,7 @@ Post CSS处理Tailwind CSS大致流程
 
 [在 Vue 3 和 Vite 安装 Tailwind CSS](https://www.tailwindcss.cn/docs/guides/vue-3-vite)
 
-需要注意：如果是安装了Tailwind CSS 2.x版本的按照文档上的配置（生产环境这些类名不会被打包）
+需要注意：如果是安装了Tailwind CSS 2.x版本，请按照文档配置（即生产环境下这些类名不会被打包）
 ```js
 module.exports = {
   purge: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
@@ -1135,10 +1135,85 @@ export default defineConfig({
 
 ## 第三十八章 函数式编程
 
-Vue常见的有template、和JSX编码风格，但还有第三种函数式编码风格。主要核心是h函数，
+Vue常见的有template、和JSX编码风格，但还有第三种函数式编码风格。主要核心是h函数（底层调用了createVNode）
+```vue
+<script lang='ts' setup>
+  import {ref,h,createVNode, render} from 'vue'
+
+  let div = createVNode('div',{id:"container"},'CONTAINER...')
+  let app = document.querySelector('#app') 
+
+  render(div,app as HTMLDivElement)
+</script>
+```
 
 h函数接受3个参数：
 - type 元素的类型
 - propsOrChildren 数据对象, 这里主要表示(props, attrs, dom props, class 和 style)
 - children 子节点
 
+基础实现：
+```vue
+<template>
+  <div class="container mx-auto px-4">
+    <Btn text="ABB" @on-click="getBtn"></Btn>
+  </div>
+</template>
+
+<script setup lang="ts">
+  import { h } from "vue";
+  
+  type Props = {
+    text:string
+  }
+
+  const Btn = (props:Props, ctx:any)=>{
+    return h('span',{
+      class:['rounded-full','py-3','px-6','shadow-lg','bg-green-400','mt-5'],
+      onClick:()=>{
+        ctx.emit('on-click','我是按钮')
+      }
+    },
+      props.text
+    )
+  }
+
+  const getBtn = (str:string)=>{
+    console.log(str);
+  }
+</script>
+```
+
+插槽：
+```vue
+<template>
+  <div class="container mx-auto px-4">
+    <Btn text="ABB" @on-click="getBtn">
+      <template #default>123</template>
+    </Btn>
+  </div>
+</template>
+
+<script setup lang="ts">
+  import { h } from "vue";
+  
+  type Props = {
+    text:string
+  }
+
+  const Btn = (props:Props, ctx:any)=>{
+    return h('span',{
+      class:['rounded-full','py-3','px-6','shadow-lg','bg-green-400','mt-5'],
+      onClick:()=>{
+        ctx.emit('on-click','我是按钮')
+      }
+    },
+      ctx.slots.default()
+    )
+  }
+
+  const getBtn = (str:string)=>{
+    console.log(str);
+  }
+</script>
+```
