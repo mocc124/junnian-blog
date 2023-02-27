@@ -1,3 +1,7 @@
+---
+sidebar: auto
+---
+
 # Vue3+vite+ts+pinia
 
 Vue 核心 [MVVM](https://www.liaoxuefeng.com/wiki/1022910821149312/1108898947791072)
@@ -1343,8 +1347,8 @@ const slotData = [
 </script>
 ```
 
-语法糖 1：可以使用#代替 v-slot:，如`<template #left></template>
-语法糖2：可以使用#default代替v-slot，如`<template #default={data}></template>
+- 语法糖 1：可以使用#代替 v-slot:，如`<template #left></template>`
+- 语法糖2：可以使用#default代替v-slot，如`<template #default={data}></template>`
 
 ### 动态插槽
 
