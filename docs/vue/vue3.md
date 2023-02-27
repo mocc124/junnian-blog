@@ -1568,11 +1568,106 @@ module.exports = config
 
 安装[friendly-errors-webpack-plugin]()依赖
 
-## 第四十三章 利用webpack手动构建 Vue3 项目
+## 第四十四章 Vue3 性能优化
 
+### 在线测试
+一般采用Chrome devTools/Lighthouse，各项数值如下：
+- FCP (First Contentful Paint)：浏览器首次内容绘制的时间，即首次白屏时间。
+- Speed Index: 页面各可见部分显示的平均时间。
+- LCP (Largest Contentful Paint)：页面最大元素绘制时间。
+- TTI（Time to Interactive）：从页面开始渲染到可交互的时间，内容必须渲染完毕，交互元素绑定的事件已经注册完成。
+- TBT（Total Blocking Time）：主进程阻塞时间，记录了首次内容绘制到用户可交互之间的时间，此阶段页面点击无反应。
+- CLS（Cumulative Layout Shift）：计算布局偏移值，会比较两次渲染帧的内容偏移情况。
 
+### 代码分析：
+vite打包是基于rollup，所以可以使用 rollup 插件分析，如 rollup-plugin-visualizery：`npm install rollup-plugin-visualizer`
 
+配置开启open：
+```js
+import { visualizer } from 'rollup-plugin-visualizer';
 
+plugins: [vue(), vueJsx(),visualizer({
+  open:true
+})],
+```
+运行build命令，网页查看代码体积
 
+### vite性能优化
 
+```js
+import { defineConfig } from 'vite'
 
+export default defineConfig({
+  build:{
+      chunkSizeWarningLimit:2000, //打包时文件大小>2000kb提示
+      cssCodeSplit:true, //css 是否拆分
+      sourcemap:false, //是否生成 sourcemap
+      minify:false, //是否禁用最小化混淆，也可以接收一个字符串指定打包：'esbuild'打包速度最快，'terser'打包体积最小
+      assetsInlineLimit:5000 //小于该大小的图片将打包成 Base64 
+  },
+})
+```
+
+### PWA 离线缓存
+
+PWA 技术的出现就是让web网页无限接近于Native 应用：
+- 可以添加到主屏幕，利用manifest实现
+- 可以实现离线缓存，利用service worker实现
+- 可以发送通知，利用service worker实现
+
+安装依赖库: `npm install vite-plugin-pwa -D`
+
+注册依赖（基本配置项）：
+```js
+import { VitePWA } from 'vite-plugin-pwa' 
+
+export default defineConfig({
+  plugins: [
+    VitePWA({
+      workbox:{
+          cacheId:"xxxName",//缓存名称
+          runtimeCaching:[
+            {
+              urlPattern:/.*\.js.*/, //缓存文件
+              handler:"StaleWhileRevalidate", //重新验证时失效
+              options:{
+                cacheName:"xxx-js", //缓存js，名称
+                expiration:{
+                  maxEntries:30, //缓存文件数量，遵循LRU算法
+                  maxAgeSeconds:30 * 24 * 60 * 60 //缓存有效期
+ 
+                }
+              }
+            }
+          ]
+      },
+    })
+  ],
+})
+```
+
+安装此插件后，会在 build 打包时，自动生成 sw.js 和 manifest。webmanifest 等PWA必须文件。
+Chrome devTools/Application/Service Workers 可以读取到sw.js文件
+
+### 图片懒加载
+
+Vue2 ，使用[vue-lazyload](https://www.npmjs.com/package/vue-lazyload)
+Vue3 ，使用[vue3-lazy](https://github.com/ustbhuangyi/vue3-lazy)
+
+### 虚拟列表
+常见面试题：后端返回的成千上万的数据如何处理？
+
+[Virtualized Table 虚拟化表格](https://element-plus.gitee.io/zh-CN/component/table-v2.html)，原理：只展示可视窗口的dom元素，其余的dom都不会被渲染。
+
+### web worker
+[Web Worker 使用教程](https://www.ruanyifeng.com/blog/2018/07/web-worker.html)
+
+注意：web werker中只能操作数据，不能操作DOM！
+
+Vueuse已经集成了[useWebWorker](https://vueuse.org/core/useWebWorker/)
+
+### 防抖、节流
+
+Vueuse也已经集成了[useDebounceFn](https://vueuse.org/shared/useDebounceFn/)
+
+## 第四十五章 
