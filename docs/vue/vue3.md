@@ -1670,4 +1670,122 @@ Vueuse已经集成了[useWebWorker](https://vueuse.org/core/useWebWorker/)
 
 Vueuse也已经集成了[useDebounceFn](https://vueuse.org/shared/useDebounceFn/)
 
-## 第四十五章 
+## 第四十五章 了解微前端 和 web Component
+Web Components 提供了基于原生支持的、对视图层的封装能力，可以让单个组件相关的 javaScript、css、html模板运行在以html标签为界限的局部环境中，不会影响到全局，组件间也不会相互影响 。 再简单来说：就是提供了我们自定义标签的能力，并且提供了标签内完整的生命周期 。
+
+web Component的组成：
+- Custom elements（自定义元素）：JavaScript API，允许定义custom elements及其行为，然后可以在我们的用户界面中按照需要使用它们。
+- Shadow DOM（影子DOM）：JavaScript API，用于将封装的“影子”DOM树附加到元素（与主文档DOM分开呈现）并控制其关联的功能。通过这种方式，开发者可以保持元素的功能私有，这样它们就可以被脚本化和样式化，而不用担心与文档的其他部分发生冲突。
+- HTML templates（HTML模板）：和元素使开发者可以编写与HTML结构类似的组件和样式。然后它们可以作为自定义元素结构的基础被多次重用。
+
+应用场景：
+微前端底层js部分是通过proxy代理劫持底层的window对象实现隔离，css部分就是通过Shadow DOM隔离样式。
+如JD的跨端框架 Taro 的组件部分，就是用基于 Web Components 开发的 。
+
+### 基本示例：
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DEMO</title>
+    <script src="./index.js"></script>
+</head>
+<body>
+    <my-node></my-node>
+    <my-node></my-node>
+</html>
+```
+
+js
+```js
+class Demo extends HTMLElement {
+    constructor(){
+        //调用super 来建立正确的原型链继承关系
+        super()
+
+        const shaDom = this.attachShadow({
+            mode:"open"
+        })
+
+        this.node = this.h('div')
+        this.node.innerText = '默认内容'
+        this.node.setAttribute('style','padding:5px;border:1px solid #ccc')
+
+        shaDom.appendChild(this.node)
+    }
+
+    h(el) {
+        return document.createElement(el)
+    }
+}
+
+window.customElements.define('my-node',Demo)
+```
+
+### tempalte风格
+
+tempalte模板中的style样式会被隔离
+
+```js
+class Btn extends HTMLElement {
+    constructor() {
+        super()
+        const template = this.h('template')
+        template.innerHTML = `
+        <div>小满</div>
+        <style>
+            div{
+                height:200px;
+                width:200px;
+                background:blue;
+            }
+        </style>
+        `
+        //表示 shadow DOM 子树的根节点。
+        const shaDow = this.attachShadow({ mode: "open" })
+ 
+        shaDow.appendChild(template.content.cloneNode(true))
+    }
+ 
+    h(el) {
+        return document.createElement(el)
+    }
+ 
+    /**
+     * 生命周期
+     */
+    //当自定义元素第一次被连接到文档 DOM 时被调用。
+    connectedCallback() {
+        console.log('已插入')
+    }
+ 
+    //当自定义元素与文档 DOM 断开连接时被调用。
+    disconnectedCallback() {
+        console.log('已断开')
+    }
+ 
+    //当自定义元素被移动到新文档时被调用
+    adoptedCallback() {
+        console.log('被移动')
+    }
+    //当自定义元素的一个属性被增加、移除或更改时被调用
+    attributeChangedCallback() {
+        console.log('被改变')
+    }
+ 
+}
+ 
+window.customElements.define('xiao-man', Btn)
+```
+
+### vue开发Web Component
+[用 Vue 来构建标准的 Web Component](https://cn.vuejs.org/guide/extras/web-components.html)
+[视频参考](https://www.bilibili.com/video/BV1dS4y1y7vd/?p=56&share_source=copy_web&vd_source=461186b903c28eeeb1342b31e0bfe68e&t=434)
+
+## Proxy 跨域
+
+
+
