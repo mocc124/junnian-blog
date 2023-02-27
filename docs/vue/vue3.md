@@ -1297,3 +1297,282 @@ VITE_IP = 180.101.50.242
 ```
 
 在vite.config.js中使用环境变量请参考:[链接](https://www.bilibili.com/video/BV1dS4y1y7vd/?p=53&share_source=copy_web&vd_source=461186b903c28eeeb1342b31e0bfe68e&t=531)
+
+
+## 第四十三章 利用webpack手动构建 Vue3 项目
+
+### 第一步 创建基本结构：
+```
+│  README.md
+│
+├─public
+│      index.html
+│
+└─src
+    │  App.vue
+    │
+    ├─assets
+    ├─components
+    └─views
+```
+
+### 第二步 配置 ts
+安装 ts：`npm install typescript -g`
+安装ts配置文件：`tsc --init`，生成 tsconfig.json 配置文件
+
+### 第三步 安装 webpack服务及其插件
+安装以下webpack依赖以及插件
+```json
+{
+  "dependencies": {
+    "html-webpack-plugin": "^5.5.0", 
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1",
+    "webpack-dev-server": "^4.11.1"
+  }
+}
+```
+
+根目录新建 webpack.config.js 配置文件（webpak基于node环境，遵循common js规范）：
+```js
+const { Configuration } = require('webpack')
+const  path  = require('path')
+const htmlWebpackPlugin = require('html-webpack-plugin')
+
+/**
+ * @type {Configuration}
+ */
+
+const config = {
+    entry: './src/main.ts', //入口文件
+    output: {
+        filename: '[hash].js',
+        path:path.resolve(__dirname,'dist')
+    },//打包出口文件
+    plugins: [
+        new htmlWebpackPlugin({
+            template: './public/index.html'
+        })
+    ]
+} 
+
+module.exports = config
+```
+
+配置 webpack 开发/打包命令：
+```js
+{
+  "scripts": {
+    "build": "webpack",
+    "dev": "webpack-dev-server"
+  },
+}
+```
+
+尝试运行打包命令`npm run build`，会产生打包文件 dist/...
+
+### 第四步 安装 vue 
+
+安装：`npm install vue`
+
+main.ts 引入 vue:
+```ts
+import { createApp } from "vue";
+import App from "./App.vue"
+
+let app = createApp(App)
+
+app.mount('#app')
+```
+
+注意：可能出现不能正确识别.vue文件，即`err: 找不到模块'./App.vue'或其相应的类型声明`，需要单独扩充 xxx.d.ts的声明文件，如下：
+```js
+// path: src/env.d.ts
+declare module "*.vue" {
+    import { DefineComponent } from "vue"
+    const component: DefineComponent<{}, {}, any>
+    export default component
+  }
+```
+
+此时尝试打包，会报错，因为 webpack 对于 vue SFC 中的 template 模板语法不能正确解析，需要借助loader
+
+### 第五步 安装 loder
+
+#### vue loader
+安装依赖 `@vue/compiler-sfc`（解析vue文件）和`vue-loader`（解析vue语法）
+```json
+{
+  "dependencies": {
+    "@vue/compiler-sfc": "^3.2.47",
+    "vue-loader": "^17.0.1",
+  }
+}
+```
+
+配置依赖：
+```ts
+const { VueLoaderPlugin } = require('vue-loader/dist/index'); 
+
+const config = {
+    plugins: [
+        new VueLoaderPlugin(), //解析vue
+    ],
+    module: {
+     rules:[
+        {
+            test: /\.vue$/, // 接收 RegExp
+            use: 'vue-loader'
+        }
+     ]   
+    }
+} 
+
+module.exports = config
+```
+
+安装完成之后，可以尝试打包（vue script中不能指定 lang='ts'，后面会解决），但是会发现dist文件中之前打包的js文件依然存在，不会被覆盖。引入`clean-webpack-plugin`依赖，在打包时自动清空dist。
+```json
+{
+  "dependencies": {
+    "clean-webpack-plugin": "^4.0.0",
+  }
+}
+```
+
+引入：
+```ts
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+
+const config = {
+    plugins: [
+        new CleanWebpackPlugin(), //build打包之前清空dist
+    ],
+} 
+
+module.exports = config
+```
+之后，可以正常打包，vue文件vue模板语法可以正常被识别。但一般我们经常会在 src/assets 目录下引入静态文件，如 css 等，目前的这个项目是不可以引入css文件的，因为缺少`css-loader`解析css文件，`style-loader`解析style样式。
+
+#### css loader
+```json
+{
+  "dependencies": {
+    "css-loader": "^6.7.3",
+    "style-loader": "^3.3.1",
+  }
+}
+```
+
+配置：
+```js
+const config = {
+    module: {
+     rules:[
+        {
+            test: /\.css$/, 
+            use: ["style-loader", "css-loader"],
+        }
+     ]   
+    }
+} 
+module.exports = config
+```
+
+之后就可以看到css文件可以被正常解析，但是在vue-cli中，是存在别名的，如@表示src，我们需要进行配置resolve:
+```js
+const  path  = require('path')
+
+const config = {
+    resolve:{
+        alias:{
+            '@':path.resolve(__dirname,'src')
+        },
+        extensions:['.vue','.ts','.js','.css']
+    }
+} 
+
+module.exports = config
+```
+
+如需引入less/sass，同上安装依赖，配置rules即可被识别并解析。
+```js
+const config = {
+    module: {
+        rules: [
+            {
+                test: /\.less$/, //解析 less
+                use: ["style-loader", "css-loader", "less-loader"],
+            }
+        ]
+    }
+}
+ 
+module.exports = config
+```
+
+#### ts loader
+安装；`npm install ts-loader`
+
+配置：
+```js
+const config = {
+    module: {
+        rules: [
+            {
+                test: /\.ts$/,  //解析ts
+                loader: "ts-loader",
+                options: {
+                    configFile: path.resolve(process.cwd(), 'tsconfig.json'),
+                    appendTsSuffixTo: [/\.vue$/]
+                },
+            }
+        ]
+    }
+}
+ 
+module.exports = config
+```
+
+### 第六步 其他配置
+
+#### webpack配置项补充
+```js
+const config = {
+    mode: "development", //环境
+    entry: './src/main.ts', //入口文件
+    output: {},//出口文件
+    module: {
+        rules: [] // loader，解析文件
+    },
+    plugins: [], //插件
+    resolve: {
+        alias: {},//别名
+        extensions: [] //识别后缀
+    },
+    stats:"errors-only", //取消提示
+    devServer: { 
+        proxy: {},
+        port: 9001,
+        hot: true,
+        open: true,
+    }, // 端口 代理等
+    externals: {
+        vue: "Vue" 
+    },//CDN 引入可以节省打包体积，性能优化
+}
+
+module.exports = config
+```
+#### 美化webpack命令行
+
+安装[friendly-errors-webpack-plugin]()依赖
+
+## 第四十三章 利用webpack手动构建 Vue3 项目
+
+
+
+
+
+
+
