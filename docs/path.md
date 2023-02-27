@@ -20,8 +20,13 @@ sidebar: auto
 [CSS3 预览](./basis/CSS.md)
 [CSS 常见布局手册](https://developer.mozilla.org/zh-CN/docs/Web/CSS/Layout_cookbook)
 
-## 二、JS 部分
+## 三、JS 部分
 
 [MDN JavaSript 部分](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript)
 [现代 JavaScript 教程](https://zh.javascript.info/)
 [常见设计模式](./basis/DesignPatterns.md)
+
+## 四、Vue 部分
+
+[Vue3](./vue/vue3.md)
+[pinia](./vue/pinia.md)
