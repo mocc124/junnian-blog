@@ -1787,5 +1787,57 @@ window.customElements.define('xiao-man', Btn)
 
 ## Proxy 跨域
 
+概念: 当一个请求url的 协议、域名、端口 三者之间任意一个与当前页面url不同即为跨域。
 
+常见解决跨域的方法：
 
+1. JSONP，基本原理:利用了HTML里script元素标签没有跨域限制，动态创建script标签，将src作为服务器地址，服务器返回一个callback接受返回的参数。限制：只能使用GET请求
+目前再用的网站：百度、豆瓣图书等
+```js
+function clickButton() {
+    let obj, s
+    obj = { "table":"products", "limit":10 }; //添加参数
+    s =  document.createElement("script"); //动态创建script
+    s.src = "接口地址xxxxxxxxxxxx"  + JSON.stringify(obj);
+    document.body.appendChild(s);
+ }
+//与后端定义callback名称
+function myFunc(myObj)  {
+    //接受后端返回的参数
+    document.getElementById("demo").innerHTML = myObj;
+}
+```
+
+2. cors 设置 CORS 允许跨域资源共享，这是后端解决的方式：
+
+可以指定地址
+```json
+{ "Access-Control-Allow-Origin": "http://xxx.com" }
+```
+
+使用通配符则任何地址都能访问，安全性低（不推荐）
+```json
+{ "Access-Control-Allow-Origin": "*" }
+```
+
+3. 正反向代理
+vite.config.js 通过[配置proxy](https://cn.vitejs.dev/config/server-options.html#server-proxy)即可实现。需要注意的时这种方式只能在dev环境下使用（启动了node服务），项目进入生产环境是不可以使用这种方式的。一般会部署到Apache或Niginx等，如niginx则可以通过配置proxy_pass解决跨域问题。
+
+```js
+export default defineConfig({
+  server: {
+    proxy: {
+      // 常见写法1：字符串简写写法：http://localhost:5173/foo -> http://localhost:4567/foo
+      '/foo': 'http://localhost:4567',
+      // 常见写法2：选项写法：http://localhost:5173/api/bar -> http://jsonplaceholder.typicode.com/bar
+      '/api': {
+        target: 'http://jsonplaceholder.typicode.com',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, ''),
+      },
+    },
+  },
+})
+```
+
+[proxy源码实现](https://www.bilibili.com/video/BV1dS4y1y7vd/?p=57&share_source=copy_web&vd_source=461186b903c28eeeb1342b31e0bfe68e&t=478)，底层使用了`http-proxy`库实现。

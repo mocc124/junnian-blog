@@ -1,2 +1,2 @@
-import "C:\\Users\\Mrnianj\\Desktop\\Blog\\node_modules\\.store\\@vuepress+core@1.9.8\\node_modules\\@vuepress\\core\\lib\\node\\internal-plugins\\style\\client.js"
+import "C:\\Users\\junnian\\Desktop\\Blog\\junnian-blog\\node_modules\\@vuepress\\core\\lib\\node\\internal-plugins\\style\\client.js"
 export default {}

@@ -28,77 +28,21 @@ export const siteData = {
         "heroText": "主 标题",
         "tagline": null,
         "actionText": null,
-        "actionLink": "/zh/guide/",
-        "footer": "MIT Licensed | Copyright © 2022-present Evan You"
+        "actionLink": "/zh/guide/"
       },
       "regularPath": "/",
       "relativePath": "README.md",
-      "key": "v-5da2a1fe",
-      "path": "/"
-    },
-    {
-      "title": "Amway",
-      "frontmatter": {
-        "sidebar": "auto"
-      },
-      "regularPath": "/amway.html",
-      "relativePath": "amway.md",
-      "key": "v-434e384c",
-      "path": "/amway.html",
-      "headers": [
-        {
-          "level": 2,
-          "title": "1. 字典/导航",
-          "slug": "_1-字典-导航"
-        },
-        {
-          "level": 2,
-          "title": "2. Api 接口",
-          "slug": "_2-api-接口"
-        },
-        {
-          "level": 2,
-          "title": "3. 社区/博客",
-          "slug": "_3-社区-博客"
-        },
-        {
-          "level": 2,
-          "title": "4. JS/TS/Node",
-          "slug": "_4-js-ts-node"
-        },
-        {
-          "level": 2,
-          "title": "5. 八股文",
-          "slug": "_5-八股文"
-        },
-        {
-          "level": 2,
-          "title": "6. CSS",
-          "slug": "_6-css"
-        },
-        {
-          "level": 2,
-          "title": "7. Git",
-          "slug": "_7-git"
-        },
-        {
-          "level": 2,
-          "title": "8. web Tools",
-          "slug": "_8-web-tools"
-        },
-        {
-          "level": 2,
-          "title": "9. 工程化协作",
-          "slug": "_9-工程化协作"
-        }
-      ]
+      "key": "v-cccbafb2",
+      "path": "/",
+      "lastUpdated": "2/8/2023, 1:15:30 PM",
+      "lastUpdatedTimestamp": 1675833330000
     },
     {
       "title": "css",
       "frontmatter": {},
       "regularPath": "/basis/CSS.html",
       "relativePath": "basis/CSS.md",
-      "key": "v-5be80026",
+      "key": "v-a2ed90f2",
       "path": "/basis/CSS.html",
       "headers": [
         {
@@ -191,14 +135,75 @@ export const siteData = {
           "title": "stylus",
           "slug": "stylus"
         }
-      ]
+      ],
+      "lastUpdated": "2/8/2023, 3:19:32 AM",
+      "lastUpdatedTimestamp": 1675797572000
+    },
+    {
+      "title": "Amway",
+      "frontmatter": {
+        "sidebar": "auto"
+      },
+      "regularPath": "/amway.html",
+      "relativePath": "amway.md",
+      "key": "v-57ac5574",
+      "path": "/amway.html",
+      "headers": [
+        {
+          "level": 2,
+          "title": "1. 字典/导航",
+          "slug": "_1-字典-导航"
+        },
+        {
+          "level": 2,
+          "title": "2. Api 接口",
+          "slug": "_2-api-接口"
+        },
+        {
+          "level": 2,
+          "title": "3. 社区/博客",
+          "slug": "_3-社区-博客"
+        },
+        {
+          "level": 2,
+          "title": "4. JS/TS/Node",
+          "slug": "_4-js-ts-node"
+        },
+        {
+          "level": 2,
+          "title": "5. 八股文",
+          "slug": "_5-八股文"
+        },
+        {
+          "level": 2,
+          "title": "6. CSS",
+          "slug": "_6-css"
+        },
+        {
+          "level": 2,
+          "title": "7. Git",
+          "slug": "_7-git"
+        },
+        {
+          "level": 2,
+          "title": "8. web Tools",
+          "slug": "_8-web-tools"
+        },
+        {
+          "level": 2,
+          "title": "9. 工程化协作",
+          "slug": "_9-工程化协作"
+        }
+      ],
+      "lastUpdated": "2/8/2023, 3:19:32 AM",
+      "lastUpdatedTimestamp": 1675797572000
     },
     {
       "title": "HTML",
       "frontmatter": {},
       "regularPath": "/basis/HTML.html",
       "relativePath": "basis/HTML.md",
-      "key": "v-dc4affbe",
+      "key": "v-43e8393b",
       "path": "/basis/HTML.html",
       "headers": [
         {
@@ -276,68 +281,147 @@ export const siteData = {
           "title": "pug",
           "slug": "pug"
         }
-      ]
-    },
-    {
-      "title": "js ninja or js killer ?",
-      "frontmatter": {},
-      "regularPath": "/basis/ReviewJacaScript.html",
-      "relativePath": "basis/ReviewJacaScript.md",
-      "key": "v-2a9646c7",
-      "path": "/basis/ReviewJacaScript.html",
-      "headers": [
-        {
-          "level": 2,
-          "title": "基础内容",
-          "slug": "基础内容"
-        },
-        {
-          "level": 2,
-          "title": "更多内容",
-          "slug": "更多内容"
-        }
-      ]
-    },
-    {
-      "title": "学习路线",
-      "frontmatter": {
-        "sidebar": "auto"
-      },
-      "regularPath": "/path.html",
-      "relativePath": "path.md",
-      "key": "v-8f224ac8",
-      "path": "/path.html",
-      "headers": [
-        {
-          "level": 2,
-          "title": "一、HTML 部分",
-          "slug": "一、html-部分"
-        },
-        {
-          "level": 2,
-          "title": "二、CSS 部分",
-          "slug": "二、css-部分"
-        },
-        {
-          "level": 2,
-          "title": "二、JS 部分",
-          "slug": "二、js-部分"
-        }
-      ]
+      ],
+      "lastUpdated": "2/8/2023, 3:19:32 AM",
+      "lastUpdatedTimestamp": 1675797572000
     },
     {
       "frontmatter": {},
       "regularPath": "/basis/JavaScript.html",
       "relativePath": "basis/JavaScript.md",
-      "key": "v-966d2ac6",
-      "path": "/basis/JavaScript.html"
+      "key": "v-b74f6692",
+      "path": "/basis/JavaScript.html",
+      "lastUpdated": "2/8/2023, 3:19:32 AM",
+      "lastUpdatedTimestamp": 1675797572000
+    },
+    {
+      "title": "第二十四章 EventBus",
+      "frontmatter": {},
+      "regularPath": "/vue/vue3.html",
+      "relativePath": "vue/vue3.md",
+      "key": "v-284a5987",
+      "path": "/vue/vue3.html",
+      "headers": [
+        {
+          "level": 2,
+          "title": "第二十四章 EventBus",
+          "slug": "第二十四章-eventbus"
+        },
+        {
+          "level": 2,
+          "title": "第二十五章 TSX",
+          "slug": "第二十五章-tsx"
+        },
+        {
+          "level": 3,
+          "title": "tsx 组件形式",
+          "slug": "tsx-组件形式"
+        },
+        {
+          "level": 2,
+          "title": "第二十六章 深入 v-model",
+          "slug": "第二十六章-深入-v-model"
+        },
+        {
+          "level": 2,
+          "title": "第二十七章 自定义指令directive",
+          "slug": "第二十七章-自定义指令directive"
+        },
+        {
+          "level": 3,
+          "title": "按钮级别鉴权示例:",
+          "slug": "按钮级别鉴权示例"
+        },
+        {
+          "level": 3,
+          "title": "利用自定义指令实现拖拽效果示例：",
+          "slug": "利用自定义指令实现拖拽效果示例"
+        },
+        {
+          "level": 2,
+          "title": "第二十八章 自定义Hooks",
+          "slug": "第二十八章-自定义hooks"
+        },
+        {
+          "level": 2,
+          "title": "第二十九章 Vue3定义全局函数/变量",
+          "slug": "第二十九章-vue3定义全局函数-变量"
+        },
+        {
+          "level": 2,
+          "title": "第三十章 Vue插件",
+          "slug": "第三十章-vue插件"
+        },
+        {
+          "level": 3,
+          "title": "实现全局loading组件效果",
+          "slug": "实现全局loading组件效果"
+        },
+        {
+          "level": 2,
+          "title": "第三十一章 UI 库",
+          "slug": "第三十一章-ui-库"
+        },
+        {
+          "level": 2,
+          "title": "第三十二章 scoped和样式传统",
+          "slug": "第三十二章-scoped和样式传统"
+        },
+        {
+          "level": 2,
+          "title": "第三十三章 css style完整新特性",
+          "slug": "第三十三章-css-style完整新特性"
+        },
+        {
+          "level": 3,
+          "title": "插槽选择器",
+          "slug": "插槽选择器"
+        },
+        {
+          "level": 3,
+          "title": "全局选择器（慎用）",
+          "slug": "全局选择器-慎用"
+        },
+        {
+          "level": 3,
+          "title": "动态class",
+          "slug": "动态class"
+        },
+        {
+          "level": 3,
+          "title": "css module",
+          "slug": "css-module"
+        },
+        {
+          "level": 3,
+          "title": "css hooks",
+          "slug": "css-hooks"
+        },
+        {
+          "level": 2,
+          "title": "第三十四章 Tailwind CSS",
+          "slug": "第三十四章-tailwind-css"
+        },
+        {
+          "level": 3,
+          "title": "基本使用",
+          "slug": "基本使用"
+        },
+        {
+          "level": 2,
+          "title": "第三十五章 Event Loop 和 nextTick",
+          "slug": "第三十五章-event-loop-和-nexttick"
+        }
+      ],
+      "lastUpdated": "2/19/2023, 10:27:18 AM",
+      "lastUpdatedTimestamp": 1676773638000
     },
     {
       "title": "设计模式",
       "frontmatter": {},
       "regularPath": "/basis/DesignPatterns.html",
       "relativePath": "basis/DesignPatterns.md",
-      "key": "v-58f96035",
+      "key": "v-5379884f",
       "path": "/basis/DesignPatterns.html",
       "headers": [
         {
@@ -390,7 +474,60 @@ export const siteData = {
           "title": "享元模式",
           "slug": "享元模式"
         }
-      ]
+      ],
+      "lastUpdated": "2/8/2023, 3:19:32 AM",
+      "lastUpdatedTimestamp": 1675797572000
+    },
+    {
+      "title": "学习路线",
+      "frontmatter": {
+        "sidebar": "auto"
+      },
+      "regularPath": "/path.html",
+      "relativePath": "path.md",
+      "key": "v-e9742a94",
+      "path": "/path.html",
+      "headers": [
+        {
+          "level": 2,
+          "title": "一、HTML 部分",
+          "slug": "一、html-部分"
+        },
+        {
+          "level": 2,
+          "title": "二、CSS 部分",
+          "slug": "二、css-部分"
+        },
+        {
+          "level": 2,
+          "title": "二、JS 部分",
+          "slug": "二、js-部分"
+        }
+      ],
+      "lastUpdated": "2/18/2023, 2:23:45 PM",
+      "lastUpdatedTimestamp": 1676701425000
+    },
+    {
+      "title": "js ninja or js killer ?",
+      "frontmatter": {},
+      "regularPath": "/basis/ReviewJacaScript.html",
+      "relativePath": "basis/ReviewJacaScript.md",
+      "key": "v-1a30d1e1",
+      "path": "/basis/ReviewJacaScript.html",
+      "headers": [
+        {
+          "level": 2,
+          "title": "基础内容",
+          "slug": "基础内容"
+        },
+        {
+          "level": 2,
+          "title": "更多内容",
+          "slug": "更多内容"
+        }
+      ],
+      "lastUpdated": "2/8/2023, 3:19:32 AM",
+      "lastUpdatedTimestamp": 1675797572000
     }
   ],
   "themeConfig": {
@@ -415,6 +552,7 @@ export const siteData = {
         "text": "MDN",
         "link": "https://developer.mozilla.org/zh-CN/"
       }
-    ]
+    ],
+    "lastUpdated": "最后更新日期"
   }
 }
