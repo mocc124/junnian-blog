@@ -18,17 +18,20 @@ sidebar: auto
 [MDN-CSS 基础](https://developer.mozilla.org/zh-CN/docs/Learn/Getting_started_with_the_web/CSS_basics)
 [MDN CSS 深入部分](https://developer.mozilla.org/zh-CN/docs/Web/CSS)
 [CSS3 预览](./basis/CSS.md)
-[CSS 常见布局手册](https://developer.mozilla.org/zh-CN/docs/Web/CSS/Layout_cookbook)
+[CSS 布局手册](https://developer.mozilla.org/zh-CN/docs/Web/CSS/Layout_cookbook)
 
 ## 三、JS 部分
 
 [MDN JavaSript 部分](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript)
 [现代 JavaScript 教程](https://zh.javascript.info/)
 [常见设计模式](./basis/DesignPatterns.md)
+[你不知道的javaScript]()
 
 ## 四、Vue 部分
 
+[Vue设计与实现 霍春阳]()
 [Vue3](./vue/vue3.md)
 [pinia](./vue/pinia.md)
+[vueX]()
 [vue Router]()
-[Echart](./vue/echart.md)
+[Echart 可视化](./vue/echart.md)
