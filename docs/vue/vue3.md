@@ -808,7 +808,6 @@ less 预处理器基本语法:
 ### 父传子（defineProps）
 
 index.vue 父组件传递参数
-
 ```vue
 <template>
   <Menu :data="menuData"></Menu>
@@ -826,7 +825,6 @@ const menuData = [
 ```
 
 Menu 子组件接收参数（js 形式）
-
 ```vue
 <template>
   <ul>
@@ -848,7 +846,6 @@ console.log(props.data);
 ```
 
 Menu 子组件接收参数（ts 泛型字面量模式更加简单）
-
 ```vue
 <template>
   <div class="menu">
@@ -878,7 +875,6 @@ console.log(props.data[0]);
 ### 子传父（defineEmits）
 
 Menu 子组件传递参数（js 形式）
-
 ```vue
 <template>
   <div class="menu">
@@ -906,7 +902,6 @@ const send = (code: string) => {
 ```
 
 父组件接收参数
-
 ```vue
 <template>
   <div class="layout">
@@ -930,7 +925,6 @@ const getCode = (...data: any) => {
 ```
 
 Menu 子组件传递参数（ts 形式）
-
 ```vue
 <template>
   <div class="menu">
@@ -1279,7 +1273,6 @@ components: {
 ### 匿名插槽和具名插槽
 
 index.vue
-
 ```vue
 <template>
   <div class="content">
@@ -1293,7 +1286,6 @@ index.vue
 ```
 
 menu.vue
-
 ```vue
 <template>
   <div class="container">
@@ -1313,8 +1305,8 @@ menu.vue
 ### 作用域插槽
 
 父组件中可以拿到子组件的值
-index.vue
 
+index.vue
 ```vue
 <template>
   <div class="content">
@@ -1328,7 +1320,6 @@ index.vue
 ```
 
 menu.vue
-
 ```vue
 <template>
   <main>
@@ -1353,7 +1344,6 @@ const slotData = [
 ### 动态插槽
 
 动态决定插槽
-
 ```vue
 <template>
   <div class="content">
@@ -2317,7 +2307,7 @@ element使用流程：
 3. 配置volar插件（非vscode编辑器可跳过）
 4. 引入组件
 
-## 第三十二章 scoped和样式传统
+## 第三十二章 scoped和样式穿透
 
 因为Vue是单页面应用，因此需要做css模块化，否则会造成样式混乱。scoped可以做到样式私有化的作用。scoped原理（渲染规则）如下：
 1. 给HTML的DOM节点添加一个不重复的data属性，如data-v-6b8c1表示唯一性
@@ -2365,7 +2355,7 @@ main {
 ```
 
 ```css
-/* vue2中使用 `:deep()` 修饰符: */
+/* vue3中使用 `:deep()` 修饰符: */
 :deep(.ipt)  {
   /* ... */
 }
