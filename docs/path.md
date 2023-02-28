@@ -30,3 +30,5 @@ sidebar: auto
 
 [Vue3](./vue/vue3.md)
 [pinia](./vue/pinia.md)
+[vue Router]()
+[Echart](./vue/echart.md)
