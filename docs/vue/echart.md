@@ -123,9 +123,14 @@ main.ts 引入 echarts5：`import * as echarts from "echarts"`
 
 引入 echarts（全部引入）：
 ```js
+import {onMounted} from 'vue'
 import * as echarts from "echarts"
 
 onMounted(()=>{
+  init()
+}) 
+
+const init = ()=>{
   let charts = echarts.init(document.querySelector("#container") as HTMLElement)
   let options = {
     title: {
@@ -146,11 +151,10 @@ onMounted(()=>{
   }
 
   charts.setOption(options)
-}) 
+}
 ```
 
 [按需引入](https://echarts.apache.org/handbook/zh/basics/import/)请参考文档
-
 
 ### 补充：echarts引入地图
 因不可抗力，地图组件已经在官方文档中移除，请自行查找，示例如下：
