@@ -44,6 +44,7 @@ sidebar: auto
 
 ## 5. Vue
 - 💢 [Vue设计与实现 霍春阳（自行购买）]()
+- 💢 [Vue 源码导论](https://vue3js.cn/start/)
 - 💢 [Vue3](./vue/vue3.md)
 - [实现一个简单模板引擎](http://www.alloyteam.com/2016/10/implement-a-simple-template-engine/)
 - 💢 [pinia](./vue/pinia.md)
