@@ -14,6 +14,7 @@ sidebar: auto
 - [小满zs的csdn博客](https://blog.csdn.net/qq1195566313)
 - [icanmeetu的简书博客](https://www.jianshu.com/u/10ae59f49b13)
 - [vortesnail的github博客](https://github.com/vortesnail/blog)
+- [cometang个人博客](https://blog-1254150235.cos-website.ap-chongqing.myqcloud.com/)
 - [The Vanilla JS Toolkit](https://vanillajstoolkit.com/)
 - [文|搞懂闭包](http://www.alloyteam.com/2019/07/closure/)
 - [文|58个面向web开发者的js技巧](https://mp.weixin.qq.com/s/o_giWcLYGNJiLjYMuLID_g)
