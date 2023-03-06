@@ -14,6 +14,11 @@ sidebar: auto
 - [小满zs的csdn博客](https://blog.csdn.net/qq1195566313)
 - [icanmeetu的简书博客](https://www.jianshu.com/u/10ae59f49b13)
 - [vortesnail的github博客](https://github.com/vortesnail/blog)
+- [The Vanilla JS Toolkit](https://vanillajstoolkit.com/)
+- [文|搞懂闭包](http://www.alloyteam.com/2019/07/closure/)
+- [文|58个面向web开发者的js技巧](https://mp.weixin.qq.com/s/o_giWcLYGNJiLjYMuLID_g)
+- [文|JS定时器与执行机制解析](http://www.alloyteam.com/2016/05/javascript-timer/)
+- [文|实战！聊聊工作中使用了哪些设计模式](https://juejin.cn/post/7023536216138055716)
 
 ## 2. HTML
 - 💢 [MDN HTML基础内容](https://developer.mozilla.org/zh-CN/docs/Learn/Getting_started_with_the_web/HTML_basics)
@@ -35,9 +40,7 @@ sidebar: auto
 - [你不知道的 JavaScript](https://www.javascriptc.com/books/you-dont-know-js/)
 - 💢 [Web Worker](http://www.alloyteam.com/2020/07/14645/)
 - 💢 [学习设计模式](https://www.patterns.dev/posts/)
-- [58个面向web开发者的js技巧](https://mp.weixin.qq.com/s/o_giWcLYGNJiLjYMuLID_g)
-- [搞懂闭包](http://www.alloyteam.com/2019/07/closure/)
-- [JS定时器与执行机制解析](http://www.alloyteam.com/2016/05/javascript-timer/)
+- 💢 [设计模式目录](https://refactoring.guru/design-patterns/catalog)
 - [web component|web沙箱实现了样式隔离](https://developer.mozilla.org/zh-CN/docs/Web/Web_Components)
 - [TS 中文手册](https://typescript.bootcss.com/)
 - [TypeScript 中高级应用与最佳实践](http://www.alloyteam.com/2019/07/13796/)
