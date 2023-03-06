@@ -14,7 +14,7 @@ MVVM（Model-View-ViewModel）架构
 - 『ViewModel』：业务逻辑层（一切 js 可视为业务逻辑）
 - 『Model』：数据层（存储数据及对数据的处理如增删改查）
 
-Vue2 与 Vue3 的区别
+### Vue2 与 Vue3 的区别
 ![Options API、Composition API](https://img-blog.csdnimg.cn/img_convert/e8ad905d83aaec45451797517ef453aa.png)
 
 Vue3 新特性：
@@ -25,7 +25,7 @@ Vue3 新特性：
 - 支持 TREE-Shaking
 - Composition API
 
-### 重写了双向绑定：
+1. 重写了双向绑定：
 
 vue2 —— 基于 Object.defineProperty get 和 set 方法实现，数组的话是重写了原型方法，如 push、pop、splice 等（源码：Observer/index.js）
 vue3 —— 基于 ES6 的 Proxy（源码地址：reactive/reactive.ts）
@@ -51,19 +51,19 @@ let proxyObj = new Proxy(obj, {
 });
 ```
 
-### 优化了 VDOM
+2. 优化了 VDOM
 
 工具网站：[Vue Template Explorer ](https://vue-next-template-explorer.netlify.app/)
 
 对于动态属性或动态标签，会添加如 TEXT、PROPS 等标记，对于静态标签会利用 [PatchFlags](https://juejin.cn/post/6968585717924495368)（diff 算法底层）做静态标记，对比时不会做全量对比。
 
-### fragments
+3. fragments
 
 Vue3 中可以由多个根标签，底层原理时给这些增加了一个虚拟节点，这个虚拟节点不会被渲染。
 同时支持 TSX 和 JSX 的写法。
 同时新增了 Suspense teleport 和 多 v-model 用法。
 
-### Vue3 Tree shaking
+4. Vue3 Tree shaking
 
 简单来讲，就是在保持代码运行结果不变的前提下，去除无用的代码
 
