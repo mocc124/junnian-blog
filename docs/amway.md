@@ -15,7 +15,8 @@ sidebar: auto
 - [icanmeetu的简书博客](https://www.jianshu.com/u/10ae59f49b13)
 - [vortesnail的github博客](https://github.com/vortesnail/blog)
 - [cometang个人博客](https://blog-1254150235.cos-website.ap-chongqing.myqcloud.com/)
-- [The Vanilla JS Toolkit](https://vanillajstoolkit.com/)
+- [ljianshu的github博客](https://github.com/ljianshu/Blog)
+- [The Vanilla JS Toolkit 网站](https://vanillajstoolkit.com/)
 - [文|搞懂闭包](http://www.alloyteam.com/2019/07/closure/)
 - [文|58个面向web开发者的js技巧](https://mp.weixin.qq.com/s/o_giWcLYGNJiLjYMuLID_g)
 - [文|JS定时器与执行机制解析](http://www.alloyteam.com/2016/05/javascript-timer/)
@@ -43,6 +44,7 @@ sidebar: auto
 - 💢 [学习设计模式](https://www.patterns.dev/posts/)
 - 💢 [设计模式目录](https://refactoring.guru/design-patterns/catalog)
 - [web component|web沙箱实现了样式隔离](https://developer.mozilla.org/zh-CN/docs/Web/Web_Components)
+- [手写源码](https://github.com/sisterAn/JavaScript-Algorithms/labels/%E6%89%8B%E5%86%99%E6%BA%90%E7%A0%81)
 - [TS 中文手册](https://typescript.bootcss.com/)
 - [TypeScript 中高级应用与最佳实践](http://www.alloyteam.com/2019/07/13796/)
 
@@ -80,8 +82,9 @@ sidebar: auto
 
 ## 7. Node
 - [Node.js 学习指南](https://blog.poetries.top/node-learning-notes/)
-- [Express]()
-- [koa]()
+- [Express](./node/express.md)
+- [koa](https://www.koajs.com.cn/#)
+- [如何更好地理解中间件和洋葱模型](https://juejin.cn/post/6890259747866411022)
 - [koa2 底层解析](https://github.com/vortesnail/blog/issues/21)
 
 ## 8. 八股文
