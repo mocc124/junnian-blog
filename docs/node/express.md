@@ -2,9 +2,15 @@
 sidebar: auto
 ---
 
-# Express
+# Express与其它框架的区别
 
-[Express 官网](https://www.expressjs.com.cn/)
+[Express.js](https://www.expressjs.com.cn/)是 Node.JS 诞生之初，是一款基于Node.js以及Chrome V8引擎，快速、极简的JS服务端开发框架。
+
+Koa.js是一款微型Web框架，写一个hello world很简单，但web应用离不开session，视图模板，路由，文件上传，日志管理。这些 Koa 都不提供，需要自行去官方的 Middleware 寻找。然而问题在于100个人可能找出100种搭配，所以这不利于项目管理，请慎重选择。
+
+Egg.js是基于Koa.js，解决了上述问题，将社区最佳实践整合进了Koa.js，另取名叫Egg.js，并且将多进程启动，开发时的热更新等问题一并解决了。这对开发者很友好，开箱即用，开箱即是最(较)佳配置。Egg.js发展期间，ECMAScript又推出了 async await，相比yield的语法async写起来更直。后面Koa.js也同步进行了跟进。
+
+Nest.js 基于Express.js的全功能框架 Nest.js，他是在Express.js上封装的，充分利用了TypeScript的特性；Nest.js的优点是社区活跃，涨势喜人，截止目前在 GitHub 拥有 43.7k Star 是近期比较热门的企业级框架。
 
 ## 了解Express
 
@@ -240,4 +246,5 @@ html
     h1= message
 ```
 访问: http://127.0.0.1:3000
+
 
