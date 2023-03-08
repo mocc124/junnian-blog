@@ -13,7 +13,7 @@ sidebar: auto
 
 配置:
 ```ts
-import {createRouter,createWebHashHistory,RouteRecordRaw} from "vue-router"
+import {createRouter,createWebHashHistory,type RouteRecordRaw} from "vue-router"
 
 let routes:Array<RouteRecordRaw> = [
     {
