@@ -1,158 +1,192 @@
 <template>
     <div class="container">
-      <div class="main">
-        <div class="main-sentence">
-          <div class="main-sentence-content">{{sentence.hitokoto}}</div>
-          <div class="main-sentence-from">
-            {{`—${sentence.from_who?sentence.from_who:""} &lt;${sentence.from?sentence.from:""}&gt;`}}
+      <header class="container-header"></header>
+      <main class="container-main">
+        <div class="main-left">
+          <h5>来口鸡汤：</h5>
+          <p>{{ soul }}</p>
+        </div>
+        <div class="main-right">
+          <div class="posts-box">
+            <h3>近期在看：</h3>
+            <ul>
+              <li v-for="item in posts">
+                <a :href="item.link">{{ item.message }}</a>
+              </li>
+            </ul>
           </div>
         </div>
-        <div class="main-start">
-          <p>{{hoemMessage}}</p>
-          <div class="main-start-btns">
-            <button class="main-btn-start">起步</button>
-            <button class="main-btn-more">查看资源</button>
+      </main>
+      <footer class="container-footer">
+        <div class="footer-left">
+          <button class="footer-btn start">
+            <a href="/path">起步</a>
+          </button>
+        </div>
+        <div class="footer-right">
+          <div class="footer-btn resource">
+            <a href="/amway">我的资源</a>
           </div>
         </div>
-      </div>
+      </footer>
     </div>
 </template>
 
-<script>
-  import hitokoto_v1 from '../axios/index';
+<script lang="js">
+import { Router } from 'vue-router';
+import {get} from '../axios/index';
 
   export default {
     data() {
-      return {
-        hoemMessage:"Vue (发音为 /vjuː/，类似 view) 是一款用于构建用户界面的 JavaScript 框架。它基于标准 HTML、CSS 和 JavaScript 构建，并提供了一套声明式的、组件化的编程模型，帮助你高效地开发用户界面。无论是简单还是复杂的界面，Vue 都可以胜任。",
-        sentence: {
-          from:"浣溪沙",
-          from_who:"苏轼",
-          hitokoto:"游蕲水清泉寺，寺临兰溪，溪水西流。"
-        }
-      }
+        return {
+            posts: [
+                { message: "web worker", link: "/path.html" },
+                { message: "PWA离线缓存", link: "" },
+                { message: "Event Loop事件循环机制", link: "" },
+                { message: "OSI七层网络模型", link: "" },
+                { message: "web comment与微前端", link: "" },
+                { message: "浏览器渲染", link: "" },
+                { message: "常规响应式布局的方式", link: "" },
+                { message: "浏览器与网络通信", link: "" },
+                { message: "装饰器模式解决了什么问题", link: "" },
+                { message: "ES6新特性之Proxy", link: "" },
+                { message: "观察者模式和发布订阅模式", link: "" },
+                { message: "Vue v-model原理解析", link: "" },
+                { message: "Webpack手动构建Vue项目流程", link: "" },
+                { message: "ESM、Commjs、AMD、CMD模块", link: "" },
+                { message: "JWT技术", link: "" },
+                { message: "", link: "" },
+            ],
+            soul: "",
+        };
     },
     mounted() {
-      this.init()
+        try {
+            this.init();
+        }
+        catch (error) {
+            console.error("mounted 初始化失败", error.message);
+        }
     },
-    methods:{
-      init() {
-        let query = {c:"i",c:"d",c:"k"}
-        hitokoto_v1.get(query).then(res=>{
-          let {from,from_who,hitokoto} = res.data
-          this.sentence = {from,from_who,hitokoto}
-        })
-      },
+    methods: {
+        init() {
+            let query = {
+                c: "d",
+                c: "h",
+                c: "j",
+                c: "k",
+            };
+            get(query).then(({ data }) => {
+                let { from, hitokoto, from_who } = data;
+                this.soul = `${hitokoto} —— ${from_who?from_who:''}《${from}》`;
+            });
+        },
+        toLink(url) {
+          
+        }
+        
     },
-    errorCaptured(err,vm,info) {
-      console.log(`cat EC: ${err.toString()}\ninfo: ${info}`); 
-      return false;
-    }
-  }
+    errorCaptured(err, vm, info) {
+        console.log(`cat EC: ${err.toString()}\ninfo: ${info}`);
+        return false;
+    },
+}
 </script>
 
 <style scoped>
 /* 自定义样式 */
+body {
+  --fg-color: #1f1c24;
+  --font-sans: "DM Sans", sans-serif;
+}
+body,ul,li,span,h3,h4,h5 {
+  margin: 0;
+  padding: 0;
+}
+li {
+  list-style: none;
+}
 .container {
   display:flex;
   flex-direction: column;
+  justify-content: space-between;
   width:100%;
-  height:100%;
-  padding:10px ;
+  height:80vh;
+  border-radius: .5rem;
+  margin-top: 1rem;
+  -webkit-box-direction: normal;
+  box-sizing: border-box;
+  color: var(--fg-color);
+  font-family: var(--font-sans);
+  font-size: 18px;
+  padding: 2rem 4rem;
+  box-shadow: 0px 10px 50px rgba(0, 0, 0, 0.1);
+  /* background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); */
+  
+
 }
 /* main start */
-.main {
-  display:flex;
-  justify-content:space-around;
-  align-items:center;
-  flex-wrap:wrap;
+.container-main {
+  flex: 1;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 3rem;
+  font-size: 1.5rem;
 }
-.main-sentence {
-  box-sizing:border-box;
-  display:flex;
+.main-left {
+  width: 100%;
+  height: 500px;
+  display: flex;
   flex-direction: column;
-  justify-content:center;
-  align-items:end;
-  max-height:200px;
-  max-width:160px;
-  min-height:150px;
-  min-width:330px;
-  color: #5a29e4;
-  padding: 0.35rem 1.136rem;
-  box-shadow: 0px 1rem 3rem rgba(0, 0, 0, 0.1);
-  border-radius: 1rem;
-  transition-duration: 200ms;
+  justify-content: center;
 }
-.main-sentence-content {
-  margin:5px 0;
+.main-right {
+  font-size: 18px;
+  width: 700px;
+  height: 500px;
+  overflow: hidden;
+  padding: 8px 20px;
+  overflow: auto;
+  box-sizing: border-box;
 }
-.main-sentence-from {
-  margin:5px 0;
+.main-right h3 {
+  margin: 6px 0;
 }
-.main-start {
-  box-sizing:border-box;
-  display:flex;
-  flex-direction: column;
-  justify-content:space-between;
-  align-items:start;
-  max-height:400px;
-  max-width:400px;
-  min-height:260px;
-  min-width:200px;
-  padding: 0.35rem 0.4rem;
-  border-radius: 1rem;
-  box-sizing:border-box;
+.main-right ul {
+  margin-left: 20px;
 }
-.main-start p {
-  margin:0;
-  padding:0;
-}
-.main-start-btns {
-   display:flex;
-}
-.main-btn-start {
-    -webkit-box-direction: normal;
-    box-sizing: border-box;
-    font-family: "DM Sans", sans-serif;
-    font-size: 15px;
-    font-weight: 400;
-    text-decoration: none;
-    padding: 10px 15px;
-    box-shadow: 0px 1rem 3rem rgba(255, 255, 255, 0);
-    border-radius: 1rem;
-    transition-duration: 200ms;
-    margin: 1rem;
-    border:0 ;
-    background-color:rgba(0,0,0,0.1);
-    color:#5a29e4;
-}
-.main-btn-more {
-    -webkit-box-direction: normal;
-    box-sizing: border-box;
-    font-family: "DM Sans", sans-serif;
-    font-size: 15px;
-    font-weight: 400;
-    text-decoration: none;
-    padding: 10px 20px;
-    box-shadow: 0px 1rem 3rem rgba(0, 0, 0, 0.1);
-    border-radius: 1rem;
-    transition-duration: 200ms;
-    margin: 1rem;
-    border:0 ;
-    background-color:rgba(0,0,0,0.1);
-    color:#5a29e4;
+.main-right ul li {
+  margin: 4px 0;
 }
 /* main end */
-/* footer start */
-.footer {
-  width:100%;
-  height:40px;
-  background-color:tomato;
+
+.container-footer {
+  display: flex;
+  align-items: center;
+  height: 3rem;
+  font-size: 1.5rem;
 }
-/* footer end */
-@media screen and (max-width: 800px)  {
-  .main-sentence {
-    display:none;
+.footer-btn {
+  font-size: 20px;
+  border-radius: 10px;
+  padding: 5px 20px;
+  border: 1px solid #ccc;
+  color: #222;
+  margin: 3rem;
+}
+.footer-btn a {
+  color: #222;
+}
+.footer-btn:hover {
+  color: seagreen;
+  /* border: 0; */
+  background-color: #fff;
+}
+/* 媒体查询 */
+@media screen and (max-width:900px) {
+  .main-left{
+    display: none;
   }
 }
 </style>
