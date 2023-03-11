@@ -246,4 +246,78 @@ http {
 
 原因：服务器是根据页面url寻找资源的。但vue项目是单页面应用，打包好的web站点只有一个html页面，不存在其他资源目录下的html，服务器找不到对应页面所以报404。
 
-解决方案:`try_files $uri $uri/ /index.html;`，这句命令的意思是如果给出的file都没有匹配到，则重新请求最后一个参数给定的uri，就是新的location匹配。
+解决方案:根路径下配置如下：
+```
+server {
+    loaction / {
+        try_files $uri $uri/ /index.html;
+    }
+}
+```
+这句命令的意思是如果给出的file都没有匹配到，则重新请求最后一个参数给定的uri，就是新的location匹配。
+
+## 添加日志分析工具
+
+P.S. 执行`try_files $uri $uri/ /index.html;`并重启即可将Linux命令提示设置为中文
+
+GoAccess是一款开源、实时，运行在命令行终端下的web日志分析工具。该工具提供快速、多样的HTTP状态统计，可以令管理员不再纠结于统计各类数据，和繁杂的指令以及一大堆管道/正则表达式。
+
+[GoAccess 操作手册](https://www.goaccess.cc/?mod=man),依照文档下载安装即可
+```
+$ wget http://tar.goaccess.io/goaccess-1.2.tar.gz
+$ tar -xzvf goaccess-1.2.tar.gz
+$ cd goaccess-1.2/
+$ ./configure
+$ make
+# make install
+```
+安装完成后,就可以全局使用`goaccess`命令了，此时进入nginx/logs/access.log文件，常规方式是使用`cat access.log`,安装成功goaccess后，则可以使用`goaccess -f access.log`,选择格式化模式即可格式化查看
+
+注意：make命令可能会报错:`configure: error: *** Missing development libraries for ncurses`。解决方式：根目录运行`yum -y install ncurses-devel`命令，安装ncurses-devel库即可
+
+## Nginx 负载均衡
+
+Nginx 负载均衡共有三种方式：
+- 轮询方式负载（默认）
+- 负载权重分配
+- 负载超时分配
+
+默认负载：
+```nginx.conf
+http {
+
+    upstream node {
+        server 47.108.233.39:5000;
+        server 47.108.233.39:5001;
+        server 47.108.233.39:5003;
+    }
+
+    server {
+        listen       80;
+        server_name  localhost;
+        location / {
+                # root   html;
+                # index  index.html index.htm;
+                proxy_pass http://node;
+        }
+    }
+}
+```
+
+按照权重weight 配置负载（权重与负载成正比关系，权重越大服务器承载的并发就越高）：
+```nginx.conf
+upstream node {
+    server 47.108.233.39:5000 weight=3;
+    server 47.108.233.39:5001 weight=2;
+    server 47.108.233.39:5003 weight=1;
+}
+```
+
+按照故障等待超时时间fail_timeout backup，配置负载（backup是备用服务器参数，可以为一个upstream设置一个backup的server，在生产server全部都出问题之后，可以自动切换到备用server上，为回复服务争取时间）
+```
+upstream  node {
+    server 47.108.233.39:5000 fail_timeout=60;
+    server 47.108.233.39:5001 fail_timeout=20;
+    server 47.108.233.39:5003 backup;
+}
+```
