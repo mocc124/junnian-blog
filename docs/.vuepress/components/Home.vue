@@ -38,9 +38,9 @@ import {get} from '../axios/index';
 
 let soul = ref('xxxxx')
 let posts = ref([
-    { message: "web worker", link: "/path.html" },
+    { message: "web worker", link: "/posts/webWorker.html" },
     { message: "PWA离线缓存", link: "" },
-    { message: "Event Loop事件循环机制", link: "" },
+    { message: "Event Loop事件循环机制", link: "/posts/EventLoop.html" },
     { message: "OSI七层网络模型", link: "" },
     { message: "web comment与微前端", link: "" },
     { message: "浏览器渲染", link: "" },
