@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Event Loop | web Ninga</title>
+    <meta name="generator" content="VuePress 1.9.9">
+    <link rel="icon" href="/junnian-blog/search.ico">
+    <script>
+    var _hmt = _hmt || [];
+    (function(){
+      let hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?1a7062b879a785e4c4c743ef69d9724e";
+      let s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();     
+    </script>
+    <meta name="description" content="...">
+    
+    <link rel="preload" href="/junnian-blog/assets/css/0.styles.b49e8280.css" as="style"><link rel="preload" href="/junnian-blog/assets/js/app.065978ad.js" as="script"><link rel="preload" href="/junnian-blog/assets/js/2.93fcb68c.js" as="script"><link rel="preload" href="/junnian-blog/assets/js/20.49d09ed6.js" as="script"><link rel="prefetch" href="/junnian-blog/assets/js/10.0509449f.js"><link rel="prefetch" href="/junnian-blog/assets/js/11.75c24a4a.js"><link rel="prefetch" href="/junnian-blog/assets/js/12.4954cf2c.js"><link rel="prefetch" href="/junnian-blog/assets/js/13.c18dd2b0.js"><link rel="prefetch" href="/junnian-blog/assets/js/14.388296b2.js"><link rel="prefetch" href="/junnian-blog/assets/js/15.ff528b19.js"><link rel="prefetch" href="/junnian-blog/assets/js/16.ac91c413.js"><link rel="prefetch" href="/junnian-blog/assets/js/17.4777b7b1.js"><link rel="prefetch" href="/junnian-blog/assets/js/18.6dcefcb3.js"><link rel="prefetch" href="/junnian-blog/assets/js/19.8db05fcc.js"><link rel="prefetch" href="/junnian-blog/assets/js/21.dbebad99.js"><link rel="prefetch" href="/junnian-blog/assets/js/22.9c1ce438.js"><link rel="prefetch" href="/junnian-blog/assets/js/23.77aad825.js"><link rel="prefetch" href="/junnian-blog/assets/js/24.f4d03864.js"><link rel="prefetch" href="/junnian-blog/assets/js/25.29e5d654.js"><link rel="prefetch" href="/junnian-blog/assets/js/3.82600b03.js"><link rel="prefetch" href="/junnian-blog/assets/js/4.70a0a44b.js"><link rel="prefetch" href="/junnian-blog/assets/js/5.37af7dc0.js"><link rel="prefetch" href="/junnian-blog/assets/js/6.0fe103ba.js"><link rel="prefetch" href="/junnian-blog/assets/js/7.3281e2c9.js"><link rel="prefetch" href="/junnian-blog/assets/js/8.5349eec0.js"><link rel="prefetch" href="/junnian-blog/assets/js/9.e5eea47b.js">
+    <link rel="stylesheet" href="/junnian-blog/assets/css/0.styles.b49e8280.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/junnian-blog/" class="home-link router-link-active"><!----> <span class="site-name">web Ninga</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/junnian-blog/" class="nav-link">
+  Home
+</a></div><div class="nav-item"><a href="/junnian-blog/path.html" class="nav-link">
+  学习路线
+</a></div><div class="nav-item"><a href="/junnian-blog/amway.html" class="nav-link">
+  资源推荐
+</a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/junnian-blog/" class="nav-link">
+  Home
+</a></div><div class="nav-item"><a href="/junnian-blog/path.html" class="nav-link">
+  学习路线
+</a></div><div class="nav-item"><a href="/junnian-blog/amway.html" class="nav-link">
+  资源推荐
+</a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Event Loop</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/junnian-blog/posts/EventLoop.html#event-loop-2" class="sidebar-link">Event Loop</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/junnian-blog/posts/EventLoop.html#思考以下代码块输出结果" class="sidebar-link">思考以下代码块输出结果</a><ul class="sidebar-sub-headers"></ul></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="event-loop"><a href="#event-loop" class="header-anchor">#</a> Event Loop</h1> <p>参考链接:<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/EventLoop" target="_blank" rel="noopener noreferrer">并发模型与事件循环<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a>，<a href="https://zh.javascript.info/event-loop" target="_blank" rel="noopener noreferrer">事件循环：微任务和宏任务<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a>，<a href="https://juejin.cn/post/6844903764202094606?utm_source=gold_browser_extension" target="_blank" rel="noopener noreferrer">一次弄懂Event Loop（彻底解决此类面试问题）<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a>，<a href="https://segmentfault.com/a/1190000016278115" target="_blank" rel="noopener noreferrer">带你彻底弄懂Event Loop<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></p> <p>Event Loop是一个执行模型，一般指的是事件循环机制。JavaScript是单线程语言，单线程的好处是不用考虑同步的问题，避免了线程复杂和保证了线程安全。但需要cpu排队处理任务，这就意味着任务可能会被阻塞，导致cpu资源被闲置。如 Ajax 从网络读取数据，cpu得等着响应结果出来，再继续往下执行，后面的任务会被阻塞。</p> <p>为了防止这种情况的发生，于是将所有任务大致分成同步任务（synchronous）和异步任务（asynchronous）。</p> <p>同步任务会在主线程上依次排队执行，会形成一个执行栈（execution context stack）。</p> <p>异步任务则不会进入主线程、而被放入&quot;任务队列&quot;（task queue），异步任务运行结束，如定时器到达时间，就在&quot;任务队列&quot;之中放置一个事件。</p> <p>&quot;执行栈&quot;中的所有同步任务被清空，系统就会读取&quot;任务队列&quot;，看看里面有哪些事件可被执行。于是那些对应的异步任务会结束等待状态，进入执行栈，依次执行。</p> <p><img src="https://www.ruanyifeng.com/blogimg/asset/2014/bg2014100802.png" alt=""></p> <p>主线程运行的时候，产生堆（heap）和栈（stack），栈中的代码调用各种外部API，它们在&quot;任务队列&quot;中加入各种事件（click，load，done）。只要栈中的代码执行完毕，主线程就会去读取&quot;任务队列&quot;，依次执行那些事件所对应的回调函数。</p> <p>实际上，JS引擎会将异步任务再次划分为宏任务和微任务，宏任务会进入到一个Event Table中，并注册回调函数，每当指定的事件完成时，这个Event Table会将这个函数移到Event Queue中；微任务也会进入到另一个Event Table中，并在里面注册回调函数，每当指定的事件完成时，Event Table会将这个函数移到Event Queue中；</p> <p><img src="https://upload-images.jianshu.io/upload_images/4820992-82913323252fde95.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/863/format/webp" alt=""></p> <ol><li>整体的script(作为第一个宏任务)开始执行的时候，会把所有代码分为两部分：“同步任务”、“异步任务”；</li> <li>同步任务会直接进入主线程依次执行；</li> <li>异步任务会再分为宏任务和微任务；</li> <li>宏任务进入到Event Table中，并在里面注册回调函数，每当指定的事件完成时，Event Table会将这个函数移到Event Queue中；</li> <li>微任务也会进入到另一个Event Table中，并在里面注册回调函数，每当指定的事件完成时，Event Table会将这个函数移到Event Queue中；</li> <li>当主线程内的任务执行完毕，主线程为空时，会检查微任务的Event Queue，如果有任务，就全部执行，如果没有就执行下一个宏任务；</li> <li>上述过程会不断重复，这就是Event Loop事件循环；</li></ol> <h2 id="event-loop-2"><a href="#event-loop-2" class="header-anchor">#</a> Event Loop</h2> <p>先大致了解几个数据结构：</p> <ul><li>队列（Queue）：先进先出，类似于排队，先排的人最先被提供服务</li> <li>栈（Stack）：先进后出，类似于向箱子里放东西，最后放置的在最顶层，也会最先被取出来</li> <li>调用栈（Call Stack）：也是栈，不过里面放的是函数</li> <li>Event Table: 存储 JavaScript 中的异步事件 (request, setTimeout, IO等) 及其对应的回调函数的列表，可以理解为一张 事件-&gt;回调函数 对应表</li> <li>Event Queue：回调函数队列，也叫 Callback Queue，当 Event Table 中的事件被触发，事件对应的 回调函数 就会被 push 进这个 Event Queue，然后等待被执行</li></ul> <p>同步任务和异步任务：</p> <ul><li>同步任务：代码按照自上而下的顺序依次执行</li> <li>异步任务（又分为宏任务和微任务，微任务执行栈被清空才会执行宏任务）
+<ul><li>微任务：Promise.then/catch/finally、MutationObserver、process.nextTick(Node.js环境)</li> <li>宏任务：Script标签、setTimeout、setInteval、UI交互事件、postMessage、Ajax</li></ul></li></ul> <p>示例1：</p> <div class="language-js extra-class"><pre class="language-js"><code>console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+<span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">)</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span>
+</code></pre></div><ol><li>开始，script 标签先进入 Call Stack</li> <li>同步任务直接在栈中被执行，输出1</li> <li>栈中的异步任务从 Call Stack 移入到 Event Table ，setTimeout是宏任务被移入宏任务 Event Table</li> <li>同步任务输出3后，执行栈 Call Stack 被清空，于是执行setTimeout（因为没有指定时间，会被直接放入Event Queue ），输出2</li></ol> <p>示例2：</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">=&gt;</span><span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">new</span> <span class="token class-name">Promise</span><span class="token punctuation">(</span><span class="token parameter">resolve</span><span class="token operator">=&gt;</span><span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">resolve</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token parameter">data</span><span class="token operator">=&gt;</span><span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">/*
+1. setTimeout 被放入宏任务队列
+2. new Promise执行输出2，Promise.then属于微任务，放入微任务队列
+3. 输出4，同步任务执行结束，执行栈被清空，检查微任务队列，执行.then方法，输出100
+4. .then执行结束，微任务执行结束，第一次循环结束，从宏任务队列拿出宏任务执行，wetTimeout执行，输出1
+*/</span>
+</code></pre></div><p>示例 3：</p> <div class="language-js extra-class"><pre class="language-js"><code>console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+<span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">=&gt;</span><span class="token punctuation">{</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">)</span>
+<span class="token keyword">const</span> p <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Promise</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">resolve<span class="token punctuation">,</span>reject</span><span class="token punctuation">)</span><span class="token operator">=&gt;</span><span class="token punctuation">{</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span>
+  <span class="token function">resolve</span><span class="token punctuation">(</span><span class="token number">1000</span><span class="token punctuation">)</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+p<span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token parameter">data</span><span class="token operator">=&gt;</span><span class="token punctuation">{</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span>
+<span class="token comment">/*
+  1. 先执行同步代码，log(1)、new Promise、log(5)
+  2. 同步代码执行结束，检查微任务队列，执行p.then，微任务队列执行完毕，再次检查微任务队列（循环执行），直到微任务队列被清空
+  3. 微任务队列清空后，执行宏任务队列，log(2)
+  执行结果： 1 3 4 5 1000 2
+*/</span> 
+</code></pre></div><p>示例 4：</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">function</span> <span class="token function">add</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+  <span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token comment">// timer1</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token number">1000</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span class="token function">add</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token comment">// timer2</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+<span class="token keyword">new</span> <span class="token class-name">Promise</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">resolve</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span>
+  <span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token comment">// timer3</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">)</span>
+  <span class="token function">resolve</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token comment">// timer4</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token number">6</span><span class="token punctuation">)</span> 
+  <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token number">7</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token number">8</span><span class="token punctuation">)</span>
+
+<span class="token comment">/*
+1. 依次执行同步任务：输出1，4，8,并依次将timer1，timer2，timer3放入宏任务队列
+2. 同步任务被清空，检查微任务队列，发现有.then，执行
+3. timer4 放入宏任务队列，然后打印输出7，.then执行结束，第一次循环结束，检查宏任务队列
+4. 宏任务队列根据执行顺序依次为，timer2，timer4，timer3，timer1，取出timer2执行，打印3
+5. timer2执行完毕，检查微任务队列，无微任务，第二次循环结束，取出下一个宏任务timeer4执行
+6. ...，打印输出6
+7. ...，打印输出5
+8. ...，打印输出2
+*/</span>
+</code></pre></div><h2 id="思考以下代码块输出结果"><a href="#思考以下代码块输出结果" class="header-anchor">#</a> 思考以下代码块输出结果</h2> <p>题1：</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">var</span> i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>i<span class="token operator">&lt;</span><span class="token number">5</span><span class="token punctuation">;</span>i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">=&gt;</span><span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span> <span class="token comment">// ?</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span> 
+<span class="token punctuation">}</span>
+</code></pre></div><p>题2：</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">async</span> <span class="token keyword">function</span> <span class="token function">Prom</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'Y'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token keyword">await</span> Promise<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'X'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">=&gt;</span><span class="token punctuation">{</span>
+	console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	Promise<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">=&gt;</span><span class="token punctuation">{</span>
+		console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">)</span>
+<span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">=&gt;</span><span class="token punctuation">{</span>
+	console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	Promise<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">=&gt;</span><span class="token punctuation">{</span>console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">)</span>
+
+Promise<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">=&gt;</span><span class="token punctuation">{</span>
+	console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+Promise<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">=&gt;</span><span class="token punctuation">{</span>
+	console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token number">6</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+Promise<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">=&gt;</span><span class="token punctuation">{</span>
+	console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token number">7</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+Promise<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">=&gt;</span><span class="token punctuation">{</span>
+	console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token number">8</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+<span class="token function">Prom</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div></div> <footer class="page-edit"><!----> <div class="last-updated"><span class="prefix">最后更新日期:</span> <span class="time">3/12/2023, 11:52:29 PM</span></div></footer> <!----> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/junnian-blog/assets/js/app.065978ad.js" defer></script><script src="/junnian-blog/assets/js/2.93fcb68c.js" defer></script><script src="/junnian-blog/assets/js/20.49d09ed6.js" defer></script>
+  </body>
+</html>
