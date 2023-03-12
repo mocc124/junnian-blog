@@ -5,22 +5,20 @@ const server = axios.create({
   timeout: 5000,
 });
 
-function get(query) {
-    try {
-      if (Object.prototype.toString.call(query) === '[object Object]') {
-        return server({
-          url: "/",
-          method: 'get',
-          params: {...query}
-        })
-      }
+export function get(query) {
+  try {
+    if (Object.prototype.toString.call(query) === '[object Object]') {
       return server({
-        url: "/?" + query,
+        url: "/",
         method: 'get',
+        params: {...query}
       })
-    } catch (error) {
-      throw new Error(`hitokoto error:${error}`)
     }
+    return server({
+      url: "/?" + query,
+      method: 'get',
+    })
+  } catch (error) {
+    throw new Error(`err: ${error} `)
   }
-
-export default {get}
+}
