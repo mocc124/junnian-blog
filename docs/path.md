@@ -1,6 +1,3 @@
----
-sidebar: auto
----
 # 学习路线图
 其它路线图:[大圣前端学习路线](https://roadmap.shengxinjing.cn/)、[JD 小满zs学习路线]()
 

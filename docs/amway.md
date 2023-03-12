@@ -1,7 +1,3 @@
----
-sidebar: auto
----
-
 # Amway
 
 推荐资源
